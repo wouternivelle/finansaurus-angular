@@ -1,0 +1,49 @@
+<div class="container" fxLayout="row" fxLayoutAlign="center none">
+  <div fxFlex="95%">
+    <mat-card>
+      <mat-card-title *ngIf="edit">Edit category</mat-card-title>
+      <mat-card-title *ngIf="!edit">Add category</mat-card-title>
+      <mat-card-content>
+        <div class="container" fxLayout="row" fxLayoutAlign="center none">
+          <div fxFlex="50%" class="text-center no-records animate">
+            <form [formGroup]="categoryForm" (ngSubmit)="onSubmit()">
+
+              <div class="form-group">
+                <mat-form-field>
+                  <input placeholder="Name" required matInput class="form-control" formControlName="name">
+                </mat-form-field>
+              </div>
+
+              <div class="form-group">
+                <mat-form-field>
+                  <mat-select placeholder="Parent" formControlName="parent">
+                    <mat-option *ngFor="let element of parentCategories | keyvalue" [value]="element.key">
+                      {{ element.value }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+
+              <div class="form-group" *ngIf="hasParent">
+                <mat-slide-toggle formControlName="hidden">Hidden</mat-slide-toggle>
+              </div>
+
+              <br/>
+
+              <div class="form-group button-row">
+                <button mat-raised-button class="btn" type="reset">
+                  Reset
+                </button>
+                <button style="margin-left: 20px" mat-raised-button color="primary" class="btn btn-success"
+                        type="submit"
+                        [disabled]="!categoryForm.valid">
+                  Add
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

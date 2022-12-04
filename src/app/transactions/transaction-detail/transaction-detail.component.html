@@ -1,0 +1,96 @@
+<div class="container" fxLayout="row" fxLayoutAlign="center none">
+  <div fxFlex="95%">
+    <mat-card>
+      <mat-card-title *ngIf="edit">Edit transaction</mat-card-title>
+      <mat-card-title *ngIf="!edit">Add transaction</mat-card-title>
+      <mat-card-content>
+        <div class="container" fxLayout="row" fxLayoutAlign="center none">
+          <div fxFlex="100%" class="text-center no-records animate">
+            <form [formGroup]="transactionForm" (ngSubmit)="onSubmit()">
+
+              <div class="form-group">
+                <mat-form-field>
+                  <input placeholder="Date" required matInput [matDatepicker]="picker"
+                         class="form-control" formControlName="date" (focus)="picker.open()">
+                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker touchUi="true" #picker></mat-datepicker>
+                </mat-form-field>
+              </div>
+
+              <div class="form-group">
+                <mat-form-field>
+                  <input required matInput [matAutocomplete]="payeeAutoComplete"
+                         placeholder="Payee" formControlName="payee">
+                </mat-form-field>
+
+                <mat-autocomplete #payeeAutoComplete="matAutocomplete" (optionSelected)="onPayeeSelected()">
+                  <mat-option *ngFor="let payee of filteredPayees" [value]="payee.name">
+                    {{payee.name}}
+                  </mat-option>
+                </mat-autocomplete>
+              </div>
+
+              <div class="form-group">
+                <mat-form-field>
+                  <input required matInput [matAutocomplete]="categoryAutoComplete"
+                         placeholder="Category" formControlName="category">
+                </mat-form-field>
+
+                <mat-autocomplete #categoryAutoComplete="matAutocomplete">
+                  <mat-option *ngFor="let category of filteredCategories" [value]="category.name">
+                    {{category.name}}
+                  </mat-option>
+                </mat-autocomplete>
+              </div>
+
+              <div class="form-group">
+                <mat-form-field>
+                  <mat-select required placeholder="Account" formControlName="account">
+                    <mat-option *ngFor="let account of accounts" [value]="account.id">
+                      {{ account.name }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+
+              <div class="form-group">
+                <mat-form-field>
+                  <input type="number" placeholder="Amount" required matInput
+                         class="form-control" formControlName="amount">
+                </mat-form-field>
+              </div>
+
+              <div class="form-group button-row">
+                <button type="button" mat-button (click)="onChangeType(transactionType.OUT)"
+                        [ngClass]="isPositive() ? 'mat-stroked-button' : 'mat-raised-button negative'">
+                  -
+                </button>
+                <button style="margin-left: 20px" type="button" mat-button (click)="onChangeType(transactionType.IN)"
+                        [ngClass]="isPositive() ? 'mat-raised-button positive' : 'mat-stroked-button'">
+                  +
+                </button>
+              </div>
+
+              <div class="form-group">
+                <mat-form-field>
+                  <input placeholder="Note" matInput class="form-control" formControlName="note">
+                </mat-form-field>
+              </div>
+
+              <div class="form-group button-row">
+                <button mat-raised-button class="btn" type="reset">
+                  Reset
+                </button>
+                <button style="margin-left: 20px" mat-raised-button color="primary" class="btn btn-success"
+                        type="submit"
+                        [disabled]="!transactionForm.valid">
+                  {{edit ? 'Update' : 'Add'}}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

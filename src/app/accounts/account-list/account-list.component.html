@@ -1,0 +1,48 @@
+<div class="container" fxLayout="row" fxLayoutAlign="center none">
+  <div fxFlex="95%">
+    <mat-card>
+      <mat-card-title>Accounts</mat-card-title>
+      <mat-card-content>
+        <button mat-raised-button color="primary" routerLink="/accounts/detail">
+          <mat-icon>add</mat-icon>
+          Add account
+        </button>
+
+        <br/>
+
+        <mat-table [dataSource]="accounts">
+          <!-- Name Column -->
+          <ng-container matColumnDef="name">
+            <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+            <mat-cell *matCellDef="let account" data-label="name">{{account.name}}</mat-cell>
+          </ng-container>
+
+          <!-- Total Column -->
+          <ng-container matColumnDef="total">
+            <mat-header-cell *matHeaderCellDef>Total</mat-header-cell>
+            <mat-cell *matCellDef="let account" data-label="total"
+                      [ngClass]="account.amount >= 0 ? 'positive' : 'negative'">
+              {{account.amount | currency:'EUR'}}
+            </mat-cell>
+          </ng-container>
+
+          <!-- Actions Column -->
+          <ng-container matColumnDef="actions">
+            <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
+            <mat-cell *matCellDef="let account" data-label="actions">
+              <button mat-icon-button routerLink="/accounts/detail/{{account.id}}">
+                <mat-icon>mode_edit</mat-icon>
+              </button>
+              <button mat-icon-button (click)="onDelete(account)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

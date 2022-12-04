@@ -1,0 +1,90 @@
+<div class="container" fxLayout="row" fxLayoutAlign="center none">
+  <div fxFlex="95%">
+    <mat-card>
+      <mat-card-title>Transactions</mat-card-title>
+      <mat-card-content>
+
+        <button mat-raised-button color="primary" routerLink="/transactions/detail">
+          <mat-icon>add</mat-icon>
+          Add transaction
+        </button>
+
+        <br>
+
+        <mat-table [dataSource]="datasource" matSort>
+          <!-- Name Column -->
+          <ng-container matColumnDef="date">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Date</mat-header-cell>
+            <mat-cell *matCellDef="let transaction"
+                      data-label="date">{{transaction.date | date: 'yyyy-MM-dd'}}</mat-cell>
+          </ng-container>
+
+          <!-- Amount Column -->
+          <ng-container matColumnDef="amount">
+            <mat-header-cell *matHeaderCellDef>Amount</mat-header-cell>
+            <mat-cell *matCellDef="let transaction" data-label="amount" [ngClass]="{
+             'positive': transaction.type === 'IN',
+            'negative': transaction.type === 'OUT' }">
+              {{transaction.type === 'IN' ? '+' : '-'}} {{transaction.amount | currency:'EUR'}}
+            </mat-cell>
+          </ng-container>
+
+          <!-- Category Column -->
+          <ng-container matColumnDef="category">
+            <mat-header-cell *matHeaderCellDef>Category</mat-header-cell>
+            <mat-cell *matCellDef="let transaction"
+                      data-label="category">{{categoryMap.get(transaction.categoryId)}}</mat-cell>
+          </ng-container>
+
+          <!-- Payee Column -->
+          <ng-container matColumnDef="payee">
+            <mat-header-cell *matHeaderCellDef>Payee</mat-header-cell>
+            <mat-cell *matCellDef="let transaction" data-label="payee">{{payeeMap.get(transaction.payeeId)}}</mat-cell>
+          </ng-container>
+
+          <!-- Note Column -->
+          <ng-container matColumnDef="note">
+            <mat-header-cell *matHeaderCellDef>Note</mat-header-cell>
+            <mat-cell *matCellDef="let transaction">{{transaction.note}}</mat-cell>
+          </ng-container>
+
+          <!-- Actions Column -->
+          <ng-container matColumnDef="actions">
+            <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
+            <mat-cell *matCellDef="let transaction" data-label="actions">
+              <button mat-icon-button routerLink="/transactions/detail/{{transaction.id}}">
+                <mat-icon>mode_edit</mat-icon>
+              </button>
+              <button mat-icon-button (click)="onDelete(transaction)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+
+        <div fxLayoutAlign="end">
+          <mat-paginator #paginator
+                         class="demo-paginator"
+                         (page)="onPage($event)"
+                         [pageSize]="pageSize"
+                         [pageIndex]="pageIndex"
+                         [length]="pageLength"
+                         [pageSizeOptions]="pageSizeOptions"
+                         [showFirstLastButtons]="true"
+                         aria-label="Select page">
+          </mat-paginator>
+        </div>
+
+        <br>
+
+        <button mat-raised-button color="primary" routerLink="/transactions/detail">
+          <mat-icon>add</mat-icon>
+          Add transaction
+        </button>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

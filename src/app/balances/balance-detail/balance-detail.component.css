@@ -1,0 +1,16 @@
+.left-align {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.parent-category {
+  font-weight: bold;
+}
+
+.child-category {
+  padding-left: 30px;
+}
+
+.link {
+  text-decoration: underline;
+}

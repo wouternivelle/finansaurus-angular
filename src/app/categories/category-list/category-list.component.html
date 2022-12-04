@@ -1,0 +1,43 @@
+<div class="container" fxLayout="row" fxLayoutAlign="center none">
+  <div fxFlex="95%">
+    <mat-card>
+      <mat-card-title>Categories</mat-card-title>
+
+      <mat-card-content>
+        <mat-table [dataSource]="categories">
+          <!-- Name Column -->
+          <ng-container matColumnDef="name">
+            <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+            <mat-cell *matCellDef="let category"
+                      [ngClass]="category.parent ? 'child-category' : 'parent-category'">
+              {{category.name}}
+            </mat-cell>
+          </ng-container>
+
+          <!-- Actions Column -->
+          <ng-container matColumnDef="actions">
+            <mat-header-cell *matHeaderCellDef class="actions-col">Actions</mat-header-cell>
+            <mat-cell *matCellDef="let category" class="actions-col">
+              <button mat-icon-button routerLink="/categories/detail/{{category.id}}">
+                <mat-icon>mode_edit</mat-icon>
+              </button>
+              <button mat-icon-button (click)="onDelete(category)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+
+        <br/>
+
+        <button mat-raised-button color="primary" routerLink="/categories/detail">
+          <mat-icon>add</mat-icon>
+          Add category
+        </button>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

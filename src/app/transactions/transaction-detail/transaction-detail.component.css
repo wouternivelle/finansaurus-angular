@@ -1,0 +1,19 @@
+.positive {
+  background-color: #32a23a;
+  color: #fff;
+}
+
+.negative {
+  background-color: #7b1fa2;
+  color: #fff;
+}
+
+mat-form-field {
+  width: 50%;
+}
+
+@media (max-width: 715px) {
+  mat-form-field {
+    width: 100%;
+  }
+}

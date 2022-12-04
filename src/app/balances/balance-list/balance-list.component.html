@@ -1,0 +1,21 @@
+<div class="container" fxLayout="row" fxLayoutAlign="center none">
+  <div fxFlex="95%">
+    <mat-card>
+      <mat-card-title *ngIf="!loading">Balance <span *ngIf="selectedBalance">{{selectedDate.getMonth() + 1}}/{{selectedDate.getFullYear()}}</span></mat-card-title>
+      <mat-card-actions *ngIf="!loading">
+        <button mat-raised-button color="primary" (click)="onLoadPreviousMonth()">
+          <mat-icon>navigate_before</mat-icon>
+          Previous
+        </button>
+        <button mat-raised-button color="primary" (click)="onLoadNextMonth()">
+          Next
+          <mat-icon>navigate_next</mat-icon>
+        </button>
+      </mat-card-actions>
+
+      <app-balances-detail [balanceLoaded]="balanceLoaded.asObservable()"></app-balances-detail>
+    </mat-card>
+
+    <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+  </div>
+</div>

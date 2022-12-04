@@ -1,0 +1,33 @@
+<div class="container" fxLayout="row" fxLayoutAlign="center none">
+  <div fxFlex="95%">
+    <mat-card>
+      <mat-card-title *ngIf="edit">Edit payee</mat-card-title>
+      <mat-card-title *ngIf="!edit">Add payee</mat-card-title>
+      <mat-card-content>
+        <div class="container" fxLayout="row" fxLayoutAlign="center none">
+          <div fxFlex="50%" class="text-center no-records animate">
+            <form [formGroup]="payeeForm" (ngSubmit)="onSubmit()">
+
+              <div class="form-group">
+                <mat-form-field>
+                  <input placeholder="Name" required matInput class="form-control" formControlName="name">
+                </mat-form-field>
+              </div>
+
+              <div class="form-group button-row">
+                <button mat-raised-button class="btn" type="reset">
+                  Reset
+                </button>
+                <button style="margin-left: 20px" mat-raised-button color="primary" class="btn btn-success"
+                        type="submit"
+                        [disabled]="!payeeForm.valid">
+                  Add
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

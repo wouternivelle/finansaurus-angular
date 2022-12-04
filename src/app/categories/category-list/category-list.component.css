@@ -1,0 +1,11 @@
+.mat-column-actions {
+  flex: 0 0 15%;
+}
+
+.child-category {
+  padding-left: 30px;
+}
+
+.parent-category {
+  font-weight: bold;
+}

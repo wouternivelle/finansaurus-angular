@@ -1,0 +1,40 @@
+<div class="container" fxLayout="row" fxLayoutAlign="center none">
+  <div fxFlex="95%">
+    <mat-card>
+      <mat-card-title>Payees</mat-card-title>
+      <mat-card-content>
+        <mat-table [dataSource]="payees">
+          <!-- Name Column -->
+          <ng-container matColumnDef="name">
+            <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+            <mat-cell *matCellDef="let payee">{{payee.name}}</mat-cell>
+          </ng-container>
+
+          <!-- Actions Column -->
+          <ng-container matColumnDef="actions">
+            <mat-header-cell *matHeaderCellDef></mat-header-cell>
+            <mat-cell *matCellDef="let payee">
+              <button mat-icon-button routerLink="/payees/detail/{{payee.id}}">
+                <mat-icon>mode_edit</mat-icon>
+              </button>
+              <button mat-icon-button (click)="onDelete(payee)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </mat-cell>
+            <mat-footer-cell *matFooterCellDef></mat-footer-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+
+        <br/>
+
+        <button mat-raised-button color="primary" routerLink="/payees/detail">
+          <mat-icon>add</mat-icon>
+          Add payee
+        </button>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

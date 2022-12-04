@@ -1,0 +1,56 @@
+<div class="container" fxLayout="row" fxLayoutAlign="center none">
+  <div fxFlex="95%">
+    <mat-card>
+      <mat-card-title *ngIf="edit">Edit account</mat-card-title>
+      <mat-card-title *ngIf="!edit">Add account</mat-card-title>
+      <mat-card-content>
+        <div class="container" fxLayout="row" fxLayoutAlign="center none">
+          <div fxFlex="50%" class="text-center no-records animate">
+            <form [formGroup]="accountForm" (ngSubmit)="onSubmit()">
+
+              <div class="form-group">
+                <mat-form-field>
+                  <input placeholder="Name" required matInput class="form-control" formControlName="name">
+                </mat-form-field>
+              </div>
+
+              <div class="form-group" *ngIf="!edit">
+                <mat-form-field>
+                  <input type="number" placeholder="{{edit ? 'Amount' : 'Beginning amount'}}" required matInput
+                         class="form-control" formControlName="amount">
+                </mat-form-field>
+              </div>
+
+              <div class="form-group">
+                <mat-form-field>
+                  <mat-select placeholder="Type" required formControlName="type">
+                    <mat-option *ngFor="let element of accountType | keyvalue" [value]="element.key">
+                      {{ element.value }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+
+              <div class="form-group">
+                <mat-slide-toggle formControlName="starred">Starred</mat-slide-toggle>
+              </div>
+
+              <br/>
+
+              <div class="form-group button-row">
+                <button mat-raised-button class="btn" type="reset">
+                  Reset
+                </button>
+                <button style="margin-left: 20px" mat-raised-button color="primary" class="btn btn-success"
+                        type="submit"
+                        [disabled]="!accountForm.valid">
+                  Add
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

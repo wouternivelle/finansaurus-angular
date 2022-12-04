@@ -1,0 +1,129 @@
+import {Component, Input, OnInit} from '@angular/core';
+import {BaseDirective} from '../../shared/base.directive';
+import {combineLatest, Observable} from 'rxjs';
+import {Balance, BalanceCategory} from '../model/balance';
+import {BalanceService} from '../../core/services/balance/balance.service';
+import {Category, CategoryType} from '../../categories/model/category';
+import {NotificationService} from '../../core/services/notification.service';
+import {CategoryService} from '../../core/services/category/category.service';
+import {TransactionService} from '../../core/services/transaction/transaction.service';
+import * as TransformationHelper from '../../shared/helper/transformation.helper';
+import {MatDialog} from '@angular/material/dialog';
+import {BalanceTransactionDialogComponent} from '../balance-transaction-dialog/balance-transaction-dialog.component';
+
+@Component({
+  selector: 'app-balances-detail',
+  templateUrl: './balance-detail.component.html',
+  styleUrls: ['./balance-detail.component.css']
+})
+export class BalanceDetailComponent extends BaseDirective implements OnInit {
+  balance: Balance | undefined;
+  categories: Category[] = [];
+
+  @Input() balanceLoaded!: Observable<Balance>;
+
+  budgeted = 0;
+  generalCategories: Category[] = [];
+
+  date: Date = new Date();
+
+  displayedColumns = ['name', 'budgeted', 'outflow', 'balance'];
+
+  constructor(private balanceService: BalanceService,
+              private notificationService: NotificationService,
+              private categoryService: CategoryService,
+              private transactionService: TransactionService,
+              private dialog: MatDialog) {
+    super();
+  }
+
+  ngOnInit() {
+    combineLatest([
+      this.balanceLoaded,
+      this.categoryService.listWithoutSystem()
+    ])
+      .subscribe(([balance, categories]) => {
+        this.balance = balance;
+        this.categories = categories;
+        this.budgeted = balance.budgeted;
+
+        this.generalCategories = TransformationHelper.orderCategories(
+          this.categories.filter(cat => cat.type === CategoryType.GENERAL && !cat.hidden)
+        );
+
+        this.date = new Date(this.balance.year, this.balance.month);
+      });
+
+  }
+
+  onBudgetCategoryEnter(categoryId: number, event: Event, categoryName: string) {
+    const value = (event.target as HTMLInputElement).value;
+    this.balanceService.updateBudget(this.balance!, categoryId, Number(value), this.categories.map(c => c.id!))
+      .subscribe(balance => {
+        this.balance = balance;
+        this.notificationService.openSnackBar(categoryName + ' is updated with ' + value);
+      });
+  }
+
+  determineBalanceForCategory(categoryId: number): number {
+    if (this.balance) {
+      return this.findCategory(this.balance, categoryId).balance;
+    }
+    return 0;
+  }
+
+  determineTotalBudgeted(): number {
+    if (this.balance) {
+      let total = 0;
+      this.balance.categories.forEach(category => total += category.budgeted);
+      return total;
+    }
+    return 0;
+  }
+
+  determineTotalOperations(): number {
+    if (this.balance) {
+      let total = 0;
+      this.balance.categories.forEach(category => total += category.operations);
+      return total;
+    }
+    return 0;
+  }
+
+  determineTotalBalance(): number {
+    if (this.balance) {
+      let total = 0;
+      this.balance.categories.forEach(category => total += category.balance);
+      return total;
+    }
+    return 0;
+  }
+
+  onUsePreviousValues(): void {
+    this.balanceService.usePreviousMonthValues(this.balance!)
+      .subscribe(() => {
+        this.notificationService.openSnackBar('The values for the previous month have been used.');
+      });
+  }
+
+  loadIncomingTransaction(): void {
+    this.transactionService.listIncomingTransactionsForBalance(this.balance!.month, this.balance!.year)
+      .subscribe(transactions => {
+        this.dialog.open(BalanceTransactionDialogComponent, {
+          width: '500px',
+          data: transactions
+        });
+      });
+  }
+
+  findCategory(balance: Balance, categoryId: number): BalanceCategory {
+    const balanceCategory = balance.categories
+      .find((element) => categoryId === element.categoryId);
+
+    if (balanceCategory) {
+      return balanceCategory;
+    } else {
+      return new BalanceCategory(categoryId, 0, 0, 0);
+    }
+  }
+}

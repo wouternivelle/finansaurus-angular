@@ -1,0 +1,28 @@
+<mat-table [dataSource]="datasource">
+  <!-- Date Column -->
+  <ng-container matColumnDef="date">
+    <mat-header-cell *matHeaderCellDef>Date</mat-header-cell>
+    <mat-cell *matCellDef="let transaction" data-label="date">{{transaction.date | date: 'yyyy-MM-dd' }}</mat-cell>
+  </ng-container>
+
+  <!-- Amount Column -->
+  <ng-container matColumnDef="amount">
+    <mat-header-cell *matHeaderCellDef>Amount</mat-header-cell>
+    <mat-cell *matCellDef="let transaction" data-label="amount"
+              [ngClass]="{
+            'positive': transaction.type === 0,
+            'negative': transaction.type === 1
+            }">
+      {{transaction.type == 0 ? '+' : '-'}} {{transaction.amount | currency:'EUR'}}
+    </mat-cell>
+  </ng-container>
+
+  <!-- Payee Column -->
+  <ng-container matColumnDef="payee">
+    <mat-header-cell *matHeaderCellDef>Payee</mat-header-cell>
+    <mat-cell *matCellDef="let transaction" data-label="payee">{{payeeMap.get(transaction.payeeId)}}</mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let element; columns: displayedColumns;"></mat-row>
+</mat-table>
