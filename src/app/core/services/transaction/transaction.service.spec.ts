@@ -23,11 +23,15 @@ describe('TransactionService', () => {
   });
 
   it('should list the transactions', done => {
-    httpClient.get.mockReturnValueOnce(of({_embedded: {transactions: [transaction]}}));
+    httpClient.get.mockReturnValueOnce(of({_embedded: {transactions: [transaction]}, page: {number: 0, size: 10, totalElements: 2, totalPages: 1}}));
 
     service.list(0, 10).subscribe(result => {
-      expect(result.length).toEqual(1);
-      expect(httpClient.get).toHaveBeenCalledWith(environment.baseUrl + 'transactions');
+      expect(result.transactions.length).toEqual(1);
+      expect(result.size).toEqual(10);
+      expect(result.totalElements).toEqual(2);
+      expect(result.totalPages).toEqual(1);
+      expect(result.index).toEqual(0);
+      expect(httpClient.get).toHaveBeenCalledWith(environment.baseUrl + 'transactions', expect.anything());
       done();
     });
   });
@@ -36,8 +40,8 @@ describe('TransactionService', () => {
     httpClient.get.mockReturnValueOnce(of({_test: []}));
 
     service.list(0, 10).subscribe(result => {
-      expect(result.length).toEqual(0);
-      expect(httpClient.get).toHaveBeenCalledWith(environment.baseUrl + 'transactions');
+      expect(result.transactions.length).toEqual(0);
+      expect(httpClient.get).toHaveBeenCalledWith(environment.baseUrl + 'transactions', expect.anything());
       done();
     });
   });
@@ -76,11 +80,10 @@ describe('TransactionService', () => {
 
   it('should list the incoming transactions for a balance', done => {
     httpClient.get.mockReturnValueOnce(of({_embedded: {transactions: [transaction]}}));
-    ;
 
     service.listIncomingTransactionsForBalance(10, 2022).subscribe(result => {
       expect(result.length).toEqual(1);
-      expect(httpClient.get).toHaveBeenCalledWith(environment.baseUrl + 'transactions/incoming-for-balance');
+      expect(httpClient.get).toHaveBeenCalledWith(environment.baseUrl + 'transactions/incoming-for-balance/2022/10');
       done();
     });
   });
@@ -90,7 +93,7 @@ describe('TransactionService', () => {
 
     service.listIncomingTransactionsForBalance(10, 2022).subscribe(result => {
       expect(result.length).toEqual(0);
-      expect(httpClient.get).toHaveBeenCalledWith(environment.baseUrl + 'transactions/incoming-for-balance');
+      expect(httpClient.get).toHaveBeenCalledWith(environment.baseUrl + 'transactions/incoming-for-balance/2022/10');
       done();
     });
   });

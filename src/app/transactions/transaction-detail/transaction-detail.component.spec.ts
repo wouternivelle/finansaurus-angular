@@ -72,7 +72,7 @@ describe('TransactionDetailComponent', () => {
     expect(component.accounts).toEqual(accounts);
     expect(transactionService.fetch).toHaveBeenCalled();
     expect(component.transactionForm.get('payee')!.value).toEqual('payee 1');
-    expect(component.transactionForm.get('account')!.value).toEqual('1');
+    expect(component.transactionForm.get('account')!.value).toEqual(1);
     expect(component.transactionForm.get('amount')!.value).toEqual('30.25');
   });
 
@@ -83,7 +83,7 @@ describe('TransactionDetailComponent', () => {
     component.accounts = [account];
     component.transactionForm.get('payee')!.setValue('payee 1');
     component.transactionForm.get('category')!.setValue('category 1');
-    component.transactionForm.get('account')!.setValue('1');
+    component.transactionForm.get('account')!.setValue(1);
     component.transactionForm.get('amount')!.setValue('50.69');
     component.transactionForm.get('type')!.setValue(TransactionType.OUT);
     component.transactionForm.get('date')!.setValue(moment(date));

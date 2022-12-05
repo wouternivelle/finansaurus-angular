@@ -9,7 +9,6 @@ export class Transaction {
   type: TransactionType;
   note?: string;
   date: Date;
-  payeeId: number | null = null;
   payeeName?: string;
   accountId: number;
   categoryId: number;

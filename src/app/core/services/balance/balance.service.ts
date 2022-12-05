@@ -44,12 +44,6 @@ export class BalanceService {
     return this.save(balance);
   }
 
-  public create(date: Date): Observable<Balance> {
-    const balance: Balance = new Balance(date.getMonth(), date.getFullYear(), 0, 0, []);
-
-    return this.save(balance);
-  }
-
   public save(balance: Balance): Observable<Balance> {
     balance.month = balance.month + 1; // Correction for zero-index
     return this.http.post<Balance>(environment.baseUrl + 'balances', balance).pipe(map(balance => {

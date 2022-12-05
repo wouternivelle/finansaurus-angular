@@ -4,6 +4,7 @@ import {Payee} from '../../payees/model/payee';
 import {Account, AccountType} from "../../accounts/model/account";
 import {Category, CategoryType} from "../../categories/model/category";
 import {Transaction, TransactionType} from "../model/transaction";
+import {TransactionsPage} from "../model/transactions.page";
 
 describe('TransactionListComponent', () => {
   let component: TransactionListComponent;
@@ -52,7 +53,7 @@ describe('TransactionListComponent', () => {
     payeeService.list.mockReturnValueOnce(of([payee]));
     accountService.list.mockReturnValueOnce(of([account]));
     categoryService.list.mockReturnValueOnce(of([category]));
-    transactionService.list.mockReturnValueOnce(of([transaction]));
+    transactionService.list.mockReturnValueOnce(of(new TransactionsPage([transaction], 0, 0, 0, 0)));
 
     await component.ngOnInit();
 

@@ -16,104 +16,30 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v1
 
-      - name: Setup Java
-        uses: actions/setup-java@v1
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
         with:
-          java-version: '12.x'
+          node-version: 17
 
-      - name: Setup Flutter
-        uses: subosito/flutter-action@v1
-        with:
-          channel: stable
-
-      - name: Flutter version
-        run: flutter --version
-
-      - name: Cache pub dependencies
+      - name: Cache node modules
+        id: cache-nodemodules
         uses: actions/cache@v2
+        env:
+          cache-name: cache-node-modules
         with:
-          path: ${{ env.FLUTTER_HOME }}/.pub-cache
-          key: ${{ runner.os }}-pub-${{ hashFiles('**/pubspec.lock') }}
-          restore-keys: ${{ runner.os }}-pub-
+          path: node_modules
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
 
-      - name: Download pub dependencies
-        run: flutter pub get
-
-      - name: Run analyzer
-        run: flutter analyze
+      - name: Install Dependencies
+        if: steps.cache-nodemodules.outputs.cache-hit != 'true'
+        run: npm install
 
       - name: Run tests
-        run: flutter test --coverage
+        run: npm run test
 
-      - name: Report code coverage
-        uses: zgosalvez/github-actions-report-lcov@v1
-        with:
-          coverage-files: coverage/lcov.info
-          artifact-name: code-coverage-report
-
-      - name: Download Android keystore
-        id: android_keystore
-        uses: timheuer/base64-to-file@v1.0.3
-        with:
-          fileName: key.jks
-          encodedString: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
-
-      - name: Create key.properties
-        run: |
-          echo "storeFile=${{ steps.android_keystore.outputs.filePath }}" > android/key.properties
-          echo "storePassword=${{ secrets.ANDROID_KEYSTORE_PASSWORD }}" >> android/key.properties
-          echo "keyPassword=${{ secrets.ANDROID_KEY_PASSWORD }}" >> android/key.properties
-          echo "keyAlias=${{ secrets.ANDROID_KEY_ALIAS }}" >> android/key.properties
-
-      - name: Create google_services.json
-        run: |
-          echo ${{ secrets.ANDROID_FIREBASE_SERVICES }} | base64 --decode > android/app/google-services.json
-
-      - name: Build Android App Bundle
-        run: flutter build appbundle --dart-define=OAUTH2_CLIENT_ID=${{ secrets.OAUTH2_CLIENT_ID }} --dart-define=CAPTCHA_SITE_KEY=${{ secrets.CAPTCHA_SITE_KEY }} --dart-define=ENVIRONMENT=PROD
-
-      - name: Build Web
-        run: flutter build web --dart-define=OAUTH2_CLIENT_ID=${{ secrets.OAUTH2_CLIENT_ID }} --dart-define=CAPTCHA_SITE_KEY=${{ secrets.CAPTCHA_SITE_KEY }} --dart-define=ENVIRONMENT=PROD
-        
-      - name: Deploy to Firebase
-        uses: w9jds/firebase-action@master
-        with:
-          args: deploy --only hosting
-        env:
-          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
-          PROJECT_ID: rhinance
-          
-      - name: Setup Ruby
-        uses: actions/setup-ruby@v1
-        with:
-          ruby-version: '2.6'
-
-      - name: Cache bundle dependencies
-        uses: actions/cache@v2
-        with:
-          path: vendor/bundle
-          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
-          restore-keys: ${{ runner.os }}-gems-
-
-      - name: Download bundle dependencies
-        run: |
-          gem install bundler:2.0.2
-          bundle config path vendor/bundle
-          bundle install
-
-      - name: Download Fastlane supply key
-        id: fastlane_supply_key
-        uses: timheuer/base64-to-file@v1.0.3
-        with:
-          fileName: supply_key.json
-          encodedString: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_KEY }}
-
-      - name: Release to Google Play (closed test)
-        env:
-          SUPPLY_PACKAGE_NAME: ${{ secrets.ANDROID_PACKAGE_NAME }}
-          SUPPLY_JSON_KEY: ${{ steps.fastlane_supply_key.outputs.filePath }}
-        run: |
-          bundle exec fastlane supply \
-          --aab build/app/outputs/bundle/release/app-release.aab \
-          --track alpha \
-          --release_status draft
+      - name: Build
+        run: npm run build:prod

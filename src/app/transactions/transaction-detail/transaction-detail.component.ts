@@ -125,7 +125,7 @@ export class TransactionDetailComponent extends BaseDirective implements OnInit 
   private fillForm(transaction: Transaction): void {
     this.currentTransaction = transaction;
 
-    const payee = this.payees.find(p => transaction.payeeId === p.id);
+    const payee = this.payees.find(p => transaction.payeeName === p.name);
     this.transactionForm.get('payee')!.setValue(payee!.name!);
     const category = this.categories.find(c => transaction.categoryId === c.id);
     this.transactionForm.get('category')!.setValue(category!.name!);

@@ -26,9 +26,10 @@ describe('BalanceService', () => {
   it('should list the balances', done => {
     httpClient.get.mockReturnValueOnce(of({_embedded: {balances: [balance]}}));
 
-    service.list().subscribe(result => {
+    const date = new Date();
+    service.list(date).subscribe(result => {
       expect(result.length).toEqual(1);
-      expect(httpClient.get).toHaveBeenCalledWith(environment.baseUrl + 'balances');
+      expect(httpClient.get).toHaveBeenCalledWith(environment.baseUrl + 'balances/' + date.getFullYear() + '/' + (date.getMonth() + 1));
       done();
     });
   });
@@ -36,20 +37,10 @@ describe('BalanceService', () => {
   it('should list 0 balances when no _embedded present', done => {
     httpClient.get.mockReturnValueOnce(of({_test: []}));
 
-    service.list().subscribe(result => {
+    const date = new Date();
+    service.list(date).subscribe(result => {
       expect(result.length).toEqual(0);
-      expect(httpClient.get).toHaveBeenCalledWith(environment.baseUrl + 'balances');
-      done();
-    });
-  });
-
-  it('should create a balance', done => {
-    httpClient.post.mockReturnValueOnce(of(balance));
-
-    service.create(new Date()).subscribe(result => {
-      expect(result).toEqual(balance);
-      expect(httpClient.post).toHaveBeenCalledWith(environment.baseUrl + 'balances',
-        new Balance(new Date().getMonth(), new Date().getFullYear(), 0, 0, []));
+      expect(httpClient.get).toHaveBeenCalledWith(environment.baseUrl + 'balances/' + date.getFullYear() + '/' + (date.getMonth() + 1));
       done();
     });
   });

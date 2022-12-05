@@ -16,11 +16,11 @@ export class TransactionService {
 
     return this.http.get<any>(environment.baseUrl + 'transactions', {params: params})
       .pipe(map(result => {
-        let transactions: Transaction[] = [];
         if (result._embedded) {
-          transactions = result._embedded.transactions as Transaction[];
+          return new TransactionsPage(result._embedded.transactions as Transaction[], result.page.number, result.page.size, result.page.totalElements, result.page.totalPages);
+        } else {
+          return new TransactionsPage([], 0, 0, 0, 0);
         }
-        return new TransactionsPage(transactions, result.page.number, result.page.size, result.page.totalElements, result.page.totalPages);
       }));
   }
 

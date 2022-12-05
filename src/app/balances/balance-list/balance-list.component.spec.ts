@@ -1,6 +1,5 @@
 import {of} from 'rxjs';
 import {BalanceListComponent} from './balance-list.component';
-import * as moment from 'moment';
 import {Balance} from '../model/balance';
 
 describe('BalanceListComponent', () => {
@@ -36,41 +35,24 @@ describe('BalanceListComponent', () => {
   });
 
   it('should load the previous month', () => {
-    const previousMonth = moment().subtract(1, 'month');
+    balanceService.list.mockReturnValueOnce(of([balance]));
+    component.balances = [balance];
 
-    const nextBalance = balance;
-    nextBalance.year = previousMonth.year();
-    nextBalance.month = previousMonth.month();
-
-    component.balances = [nextBalance];
+    component.balances = [balance];
 
     component.onLoadPreviousMonth();
 
-    expect(balanceService.create).not.toBeCalled();
+    expect(balanceService.list).toBeCalled();
     expect(balanceLoaded.next).toBeCalled();
   });
 
   it('should load the next month', () => {
-    const nextMonth = moment().add(1, 'month');
-
-    const nextBalance = new Balance(nextMonth.month(), nextMonth.year(), 0, 100, []);
-
-    component.balances = [nextBalance];
+    balanceService.list.mockReturnValueOnce(of([balance]));
+    component.balances = [balance];
 
     component.onLoadNextMonth();
 
-    expect(balanceService.create).not.toBeCalled();
-    expect(balanceLoaded.next).toBeCalled();
-  });
-
-  it('should load the next month with none existing and thus one being created', async() => {
-    component.balances = [];
-
-    balanceService.create.mockReturnValueOnce(of(balance));
-
-    await component.onLoadNextMonth();
-
-    expect(balanceService.create).toBeCalled();
+    expect(balanceService.list).toBeCalled();
     expect(balanceLoaded.next).toBeCalled();
   });
 });
