@@ -7,7 +7,7 @@
 
     <a class="navbar-brand" [routerLink]="['/']" matTooltip="Home">
       <h1>
-        Rhinance
+        Finansaurus
       </h1>
     </a>
 
@@ -17,12 +17,7 @@
       <mat-icon>person</mat-icon>
     </button>
     <mat-menu #userMenu="matMenu" xPosition="before" yPosition="above" [overlapTrigger]="false">
-      <a mat-menu-item [routerLink]="['/profile']">
-        <mat-icon>person</mat-icon>
-        <span>Profile</span>
-      </a>
-
-      <a mat-menu-item [routerLink]="['/auth/login']">
+      <a mat-menu-item (click)="logout()">
         <mat-icon>exit_to_app</mat-icon>
         <span>Log out</span>
       </a>
@@ -31,6 +26,7 @@
 
       <span mat-menu-item>
         <mat-icon>info</mat-icon>
+        <span>{{version}}</span>
       </span>
     </mat-menu>
   </mat-toolbar>
@@ -88,11 +84,6 @@
             people
           </mat-icon>
           <p mat-line>Payees</p>
-        </a>
-
-        <a mat-list-item [routerLink]="['/profile']">
-          <mat-icon mat-list-icon>person</mat-icon>
-          <p mat-line>Profile</p>
         </a>
 
         <a id="push-bottom" mat-list-item [routerLink]="['/about']" routerLinkActive="active">
