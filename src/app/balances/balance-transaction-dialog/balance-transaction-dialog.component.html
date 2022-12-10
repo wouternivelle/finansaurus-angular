@@ -10,10 +10,10 @@
     <mat-header-cell *matHeaderCellDef>Amount</mat-header-cell>
     <mat-cell *matCellDef="let transaction" data-label="amount"
               [ngClass]="{
-            'positive': transaction.type === 0,
-            'negative': transaction.type === 1
+            'positive': transaction.type === 'IN',
+            'negative': transaction.type === 'OUT'
             }">
-      {{transaction.type == 0 ? '+' : '-'}} {{transaction.amount | currency:'EUR'}}
+      {{transaction.type == 'IN' ? '+' : '-'}} {{transaction.amount | currency:'EUR'}}
     </mat-cell>
   </ng-container>
 

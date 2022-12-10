@@ -37,7 +37,7 @@ export class TransactionService {
   }
 
   public listIncomingTransactionsForBalance(month: number, year: number): Observable<Transaction[]> {
-    return this.http.get<any>(environment.baseUrl + 'transactions/incoming-for-balance/' + year + '/' + month)
+    return this.http.get<any>(environment.baseUrl + 'transactions/incoming-for-balance/' + year + '/' + (month + 1))
       .pipe(map(result => {
         if (result._embedded) {
           return result._embedded.transactions as Transaction[];

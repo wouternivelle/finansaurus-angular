@@ -4,6 +4,7 @@ import {Router} from "@angular/router";
 import {Observable} from "rxjs";
 import {User} from "../../../auth/model/user";
 import {map} from "rxjs/operators";
+import {environment} from "../../../../environments/environment";
 
 @Injectable({providedIn: 'root'})
 export class AuthenticationService {
@@ -16,7 +17,7 @@ export class AuthenticationService {
   }
 
   login(password: string): Observable<any> {
-    return this.httpClient.post('login', {password: password})
+    return this.httpClient.post(environment.baseUrl + 'login', {password: password})
       .pipe(map(user => {
         if (user) {
           sessionStorage.setItem('user', JSON.stringify(new User(window.btoa('user:' + password))));

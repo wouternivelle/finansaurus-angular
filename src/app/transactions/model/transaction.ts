@@ -10,6 +10,7 @@ export class Transaction {
   note?: string;
   date: Date;
   payeeName?: string;
+  payeeId?: string;
   accountId: number;
   categoryId: number;
 
