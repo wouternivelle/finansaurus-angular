@@ -56,6 +56,7 @@ describe('TransactionDetailComponent', () => {
     const accounts = [account, starredAccount];
     const date = new Date();
     transaction.date = date;
+    transaction.payeeId = 1;
 
     categoryService.list.mockReturnValueOnce(of([category]));
     payeeService.list.mockReturnValueOnce(of([payee]));

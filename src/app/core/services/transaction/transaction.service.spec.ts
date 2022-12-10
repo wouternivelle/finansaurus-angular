@@ -83,7 +83,7 @@ describe('TransactionService', () => {
 
     service.listIncomingTransactionsForBalance(10, 2022).subscribe(result => {
       expect(result.length).toEqual(1);
-      expect(httpClient.get).toHaveBeenCalledWith(environment.baseUrl + 'transactions/incoming-for-balance/2022/10');
+      expect(httpClient.get).toHaveBeenCalledWith(environment.baseUrl + 'transactions/incoming-for-balance/2022/11');
       done();
     });
   });
@@ -93,7 +93,7 @@ describe('TransactionService', () => {
 
     service.listIncomingTransactionsForBalance(10, 2022).subscribe(result => {
       expect(result.length).toEqual(0);
-      expect(httpClient.get).toHaveBeenCalledWith(environment.baseUrl + 'transactions/incoming-for-balance/2022/10');
+      expect(httpClient.get).toHaveBeenCalledWith(environment.baseUrl + 'transactions/incoming-for-balance/2022/11');
       done();
     });
   });
