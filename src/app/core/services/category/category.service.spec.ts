@@ -27,7 +27,7 @@ describe('CategoryService', () => {
 
     service.list().subscribe(result => {
       expect(result.length).toEqual(1);
-      expect(httpClient.get).toHaveBeenCalledWith(environment.baseUrl + 'categories');
+      expect(httpClient.get).toHaveBeenCalledWith(environment.apiURL + 'categories');
       done();
     });
   });
@@ -37,7 +37,7 @@ describe('CategoryService', () => {
 
     service.list().subscribe(result => {
       expect(result.length).toEqual(0);
-      expect(httpClient.get).toHaveBeenCalledWith(environment.baseUrl + 'categories');
+      expect(httpClient.get).toHaveBeenCalledWith(environment.apiURL + 'categories');
       done();
     });
   });
@@ -47,7 +47,7 @@ describe('CategoryService', () => {
 
     service.listWithoutSystem().subscribe(result => {
       expect(result.length).toEqual(1);
-      expect(httpClient.get).toHaveBeenCalledWith(environment.baseUrl + 'categories/no-system');
+      expect(httpClient.get).toHaveBeenCalledWith(environment.apiURL + 'categories/no-system');
       done();
     });
   });
@@ -57,7 +57,7 @@ describe('CategoryService', () => {
 
     service.save(category).subscribe(result => {
       expect(result).toEqual(category);
-      expect(httpClient.post).toHaveBeenCalledWith(environment.baseUrl + 'categories', category);
+      expect(httpClient.post).toHaveBeenCalledWith(environment.apiURL + 'categories', category);
       done();
     });
   });
@@ -68,7 +68,7 @@ describe('CategoryService', () => {
 
     service.fetch(id).subscribe(result => {
       expect(result).toEqual(category);
-      expect(httpClient.get).toHaveBeenCalledWith(environment.baseUrl + 'categories/' + id);
+      expect(httpClient.get).toHaveBeenCalledWith(environment.apiURL + 'categories/' + id);
       done();
     });
   });
@@ -79,7 +79,7 @@ describe('CategoryService', () => {
 
     service.delete(id).subscribe(result => {
       expect(result).toEqual(id);
-      expect(httpClient.delete).toHaveBeenCalledWith(environment.baseUrl + 'categories/' + id);
+      expect(httpClient.delete).toHaveBeenCalledWith(environment.apiURL + 'categories/' + id);
       done();
     });
   });

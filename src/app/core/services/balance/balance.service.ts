@@ -11,7 +11,7 @@ export class BalanceService {
   }
 
   public list(selectedDate: Date): Observable<Balance[]> {
-    return this.http.get<any>(environment.baseUrl + 'balances/' + selectedDate.getFullYear() + "/" + (selectedDate.getMonth() + 1))
+    return this.http.get<any>(environment.apiURL + 'balances/' + selectedDate.getFullYear() + "/" + (selectedDate.getMonth() + 1))
       .pipe(map(result => {
         if (result._embedded) {
           let balances = result._embedded.balances as Balance[];
@@ -46,14 +46,14 @@ export class BalanceService {
 
   public save(balance: Balance): Observable<Balance> {
     balance.month = balance.month + 1; // Correction for zero-index
-    return this.http.post<Balance>(environment.baseUrl + 'balances', balance).pipe(map(balance => {
+    return this.http.post<Balance>(environment.apiURL + 'balances', balance).pipe(map(balance => {
       balance.month = balance.month - 1; // Correction for zero-index
       return balance;
     }));
   }
 
   public usePreviousMonthValues(balance: Balance): Observable<Balance> {
-    return this.http.patch<Balance>(environment.baseUrl + 'balances/use-previous-month', balance)
+    return this.http.patch<Balance>(environment.apiURL + 'balances/use-previous-month', balance)
   }
 
   private cleanCategories(balance: Balance, categoryIds: number[]) {

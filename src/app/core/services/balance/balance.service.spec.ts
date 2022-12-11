@@ -29,7 +29,7 @@ describe('BalanceService', () => {
     const date = new Date();
     service.list(date).subscribe(result => {
       expect(result.length).toEqual(1);
-      expect(httpClient.get).toHaveBeenCalledWith(environment.baseUrl + 'balances/' + date.getFullYear() + '/' + (date.getMonth() + 1));
+      expect(httpClient.get).toHaveBeenCalledWith(environment.apiURL + 'balances/' + date.getFullYear() + '/' + (date.getMonth() + 1));
       done();
     });
   });
@@ -40,7 +40,7 @@ describe('BalanceService', () => {
     const date = new Date();
     service.list(date).subscribe(result => {
       expect(result.length).toEqual(0);
-      expect(httpClient.get).toHaveBeenCalledWith(environment.baseUrl + 'balances/' + date.getFullYear() + '/' + (date.getMonth() + 1));
+      expect(httpClient.get).toHaveBeenCalledWith(environment.apiURL + 'balances/' + date.getFullYear() + '/' + (date.getMonth() + 1));
       done();
     });
   });
@@ -50,7 +50,7 @@ describe('BalanceService', () => {
 
     service.save(balance).subscribe(result => {
       expect(result).toEqual(balance);
-      expect(httpClient.post).toHaveBeenCalledWith(environment.baseUrl + 'balances', balance);
+      expect(httpClient.post).toHaveBeenCalledWith(environment.apiURL + 'balances', balance);
       done();
     });
   });
@@ -93,7 +93,7 @@ describe('BalanceService', () => {
     httpClient.patch.mockReturnValueOnce(of(balance));
 
     service.usePreviousMonthValues(balance).subscribe(() => {
-      expect(httpClient.patch).toHaveBeenCalledWith(environment.baseUrl + 'balances/use-previous-month', balance);
+      expect(httpClient.patch).toHaveBeenCalledWith(environment.apiURL + 'balances/use-previous-month', balance);
       done();
     });
   });

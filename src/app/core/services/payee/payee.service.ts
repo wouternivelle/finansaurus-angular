@@ -11,7 +11,7 @@ export class PayeeService {
   }
 
   public list(): Observable<Payee[]> {
-    return this.http.get<any>(environment.baseUrl + 'payees')
+    return this.http.get<any>(environment.apiURL + 'payees')
       .pipe(map(result => {
         if (result._embedded) {
           return result._embedded.payees as Payee[];
@@ -22,14 +22,14 @@ export class PayeeService {
   }
 
   public save(payee: Payee): Observable<Payee> {
-    return this.http.post<Payee>(environment.baseUrl + 'payees', payee);
+    return this.http.post<Payee>(environment.apiURL + 'payees', payee);
   }
 
   public fetch(id: number): Observable<Payee> {
-    return this.http.get<Payee>(environment.baseUrl + 'payees/' + id);
+    return this.http.get<Payee>(environment.apiURL + 'payees/' + id);
   }
 
   public delete(id: number): Observable<Object> {
-    return this.http.delete(environment.baseUrl + 'payees/' + id);
+    return this.http.delete(environment.apiURL + 'payees/' + id);
   }
 }

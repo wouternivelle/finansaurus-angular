@@ -31,7 +31,7 @@ describe('TransactionService', () => {
       expect(result.totalElements).toEqual(2);
       expect(result.totalPages).toEqual(1);
       expect(result.index).toEqual(0);
-      expect(httpClient.get).toHaveBeenCalledWith(environment.baseUrl + 'transactions', expect.anything());
+      expect(httpClient.get).toHaveBeenCalledWith(environment.apiURL + 'transactions', expect.anything());
       done();
     });
   });
@@ -41,7 +41,7 @@ describe('TransactionService', () => {
 
     service.list(0, 10).subscribe(result => {
       expect(result.transactions.length).toEqual(0);
-      expect(httpClient.get).toHaveBeenCalledWith(environment.baseUrl + 'transactions', expect.anything());
+      expect(httpClient.get).toHaveBeenCalledWith(environment.apiURL + 'transactions', expect.anything());
       done();
     });
   });
@@ -51,7 +51,7 @@ describe('TransactionService', () => {
 
     service.save(transaction).subscribe(result => {
       expect(result).toEqual(transaction);
-      expect(httpClient.post).toHaveBeenCalledWith(environment.baseUrl + 'transactions', transaction);
+      expect(httpClient.post).toHaveBeenCalledWith(environment.apiURL + 'transactions', transaction);
       done();
     });
   });
@@ -62,7 +62,7 @@ describe('TransactionService', () => {
 
     service.fetch(id).subscribe(result => {
       expect(result).toEqual(transaction);
-      expect(httpClient.get).toHaveBeenCalledWith(environment.baseUrl + 'transactions/' + id);
+      expect(httpClient.get).toHaveBeenCalledWith(environment.apiURL + 'transactions/' + id);
       done();
     });
   });
@@ -73,7 +73,7 @@ describe('TransactionService', () => {
 
     service.delete(id).subscribe(result => {
       expect(result).toEqual(id);
-      expect(httpClient.delete).toHaveBeenCalledWith(environment.baseUrl + 'transactions/' + id);
+      expect(httpClient.delete).toHaveBeenCalledWith(environment.apiURL + 'transactions/' + id);
       done();
     });
   });
@@ -83,7 +83,7 @@ describe('TransactionService', () => {
 
     service.listIncomingTransactionsForBalance(10, 2022).subscribe(result => {
       expect(result.length).toEqual(1);
-      expect(httpClient.get).toHaveBeenCalledWith(environment.baseUrl + 'transactions/incoming-for-balance/2022/11');
+      expect(httpClient.get).toHaveBeenCalledWith(environment.apiURL + 'transactions/incoming-for-balance/2022/11');
       done();
     });
   });
@@ -93,7 +93,7 @@ describe('TransactionService', () => {
 
     service.listIncomingTransactionsForBalance(10, 2022).subscribe(result => {
       expect(result.length).toEqual(0);
-      expect(httpClient.get).toHaveBeenCalledWith(environment.baseUrl + 'transactions/incoming-for-balance/2022/11');
+      expect(httpClient.get).toHaveBeenCalledWith(environment.apiURL + 'transactions/incoming-for-balance/2022/11');
       done();
     });
   });

@@ -19,7 +19,7 @@ export class AuthenticationService {
   login(password: string): Observable<any> {
     const encodedAuth = window.btoa('user:' + password);
     const headers: HttpHeaders = new HttpHeaders({'Authorization': 'Basic ' + encodedAuth});
-    return this.httpClient.head(environment.baseUrl + 'login', {headers: headers})
+    return this.httpClient.head(environment.apiURL + 'login', {headers: headers})
       .pipe(map(() => {
         sessionStorage.setItem('user', JSON.stringify(new User(encodedAuth)));
         this.loggedIn = true;

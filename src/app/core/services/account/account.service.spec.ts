@@ -27,7 +27,7 @@ describe('AccountService', () => {
 
     service.list().subscribe(result => {
       expect(result.length).toEqual(1);
-      expect(httpClient.get).toHaveBeenCalledWith(environment.baseUrl + 'accounts');
+      expect(httpClient.get).toHaveBeenCalledWith(environment.apiURL + 'accounts');
       done();
     });
   });
@@ -37,7 +37,7 @@ describe('AccountService', () => {
 
     service.list().subscribe(result => {
       expect(result.length).toEqual(0);
-      expect(httpClient.get).toHaveBeenCalledWith(environment.baseUrl + 'accounts');
+      expect(httpClient.get).toHaveBeenCalledWith(environment.apiURL + 'accounts');
       done();
     });
   });
@@ -47,7 +47,7 @@ describe('AccountService', () => {
 
     service.save(account).subscribe(result => {
       expect(result).toEqual(account);
-      expect(httpClient.post).toHaveBeenCalledWith(environment.baseUrl + 'accounts', account);
+      expect(httpClient.post).toHaveBeenCalledWith(environment.apiURL + 'accounts', account);
       done();
     });
   });
@@ -58,7 +58,7 @@ describe('AccountService', () => {
 
     service.fetch(id).subscribe(result => {
       expect(result).toEqual(account);
-      expect(httpClient.get).toHaveBeenCalledWith(environment.baseUrl + 'accounts/' + id);
+      expect(httpClient.get).toHaveBeenCalledWith(environment.apiURL + 'accounts/' + id);
       done();
     });
   });
@@ -69,7 +69,7 @@ describe('AccountService', () => {
 
     service.delete(id).subscribe(result => {
       expect(result).toEqual(id);
-      expect(httpClient.delete).toHaveBeenCalledWith(environment.baseUrl + 'accounts/' + id);
+      expect(httpClient.delete).toHaveBeenCalledWith(environment.apiURL + 'accounts/' + id);
       done();
     });
   });

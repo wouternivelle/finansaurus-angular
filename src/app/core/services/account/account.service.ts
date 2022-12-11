@@ -11,7 +11,7 @@ export class AccountService {
   }
 
   public list(): Observable<Account[]> {
-    return this.http.get<any>(environment.baseUrl + 'accounts')
+    return this.http.get<any>(environment.apiURL + 'accounts')
       .pipe(map(result => {
         if (result._embedded) {
           return result._embedded.accounts as Account[];
@@ -22,14 +22,14 @@ export class AccountService {
   }
 
   public save(account: Account): Observable<Account> {
-    return this.http.post<Account>(environment.baseUrl + 'accounts', account);
+    return this.http.post<Account>(environment.apiURL + 'accounts', account);
   }
 
   public fetch(id: number): Observable<Account> {
-    return this.http.get<Account>(environment.baseUrl + 'accounts/' + id);
+    return this.http.get<Account>(environment.apiURL + 'accounts/' + id);
   }
 
   public delete(id: number): Observable<Object> {
-    return this.http.delete(environment.baseUrl + 'accounts/' + id);
+    return this.http.delete(environment.apiURL + 'accounts/' + id);
   }
 }

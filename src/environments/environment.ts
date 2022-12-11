@@ -4,7 +4,9 @@
 
 export const environment = {
   production: false,
-  baseUrl: "http://localhost:8080/"
+
+  // @ts-ignore
+  apiURL: window['env'] ? window['env']['apiURL'] : 'http://localhost:8080/'
 };
 
 /*

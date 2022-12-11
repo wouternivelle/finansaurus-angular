@@ -25,7 +25,7 @@ describe('PayeeService', () => {
 
     service.list().subscribe(result => {
       expect(result.length).toEqual(1);
-      expect(httpClient.get).toHaveBeenCalledWith(environment.baseUrl + 'payees');
+      expect(httpClient.get).toHaveBeenCalledWith(environment.apiURL + 'payees');
       done();
     });
   });
@@ -35,7 +35,7 @@ describe('PayeeService', () => {
 
     service.list().subscribe(result => {
       expect(result.length).toEqual(0);
-      expect(httpClient.get).toHaveBeenCalledWith(environment.baseUrl + 'payees');
+      expect(httpClient.get).toHaveBeenCalledWith(environment.apiURL + 'payees');
       done();
     });
   });
@@ -46,7 +46,7 @@ describe('PayeeService', () => {
 
     service.save(payee).subscribe(result => {
       expect(result).toEqual(payee);
-      expect(httpClient.post).toHaveBeenCalledWith(environment.baseUrl + 'payees', payee);
+      expect(httpClient.post).toHaveBeenCalledWith(environment.apiURL + 'payees', payee);
       done();
     });
   });
@@ -58,7 +58,7 @@ describe('PayeeService', () => {
 
     service.fetch(id).subscribe(result => {
       expect(result).toEqual(payee);
-      expect(httpClient.get).toHaveBeenCalledWith(environment.baseUrl + 'payees/' + id);
+      expect(httpClient.get).toHaveBeenCalledWith(environment.apiURL + 'payees/' + id);
       done();
     });
   });
@@ -69,7 +69,7 @@ describe('PayeeService', () => {
 
     service.delete(id).subscribe(result => {
       expect(result).toEqual(id);
-      expect(httpClient.delete).toHaveBeenCalledWith(environment.baseUrl + 'payees/' + id);
+      expect(httpClient.delete).toHaveBeenCalledWith(environment.apiURL + 'payees/' + id);
       done();
     });
   });

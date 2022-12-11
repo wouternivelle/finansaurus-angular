@@ -11,7 +11,7 @@ export class CategoryService {
   }
 
   public list(): Observable<Category[]> {
-    return this.http.get<any>(environment.baseUrl + 'categories')
+    return this.http.get<any>(environment.apiURL + 'categories')
       .pipe(map(result => {
         if (result._embedded) {
           return result._embedded.categories as Category[];
@@ -22,7 +22,7 @@ export class CategoryService {
   }
 
   public listWithoutSystem(): Observable<Category[]> {
-    return this.http.get<any>(environment.baseUrl + 'categories/no-system')
+    return this.http.get<any>(environment.apiURL + 'categories/no-system')
       .pipe(map(result => {
         if (result._embedded) {
           return result._embedded.categories as Category[];
@@ -33,14 +33,14 @@ export class CategoryService {
   }
 
   public save(category: Category): Observable<Category> {
-    return this.http.post<Category>(environment.baseUrl + 'categories', category);
+    return this.http.post<Category>(environment.apiURL + 'categories', category);
   }
 
   public fetch(id: number): Observable<Category> {
-    return this.http.get<Category>(environment.baseUrl + 'categories/' + id);
+    return this.http.get<Category>(environment.apiURL + 'categories/' + id);
   }
 
   public delete(id: number): Observable<Object> {
-    return this.http.delete(environment.baseUrl + 'categories/' + id);
+    return this.http.delete(environment.apiURL + 'categories/' + id);
   }
 }
