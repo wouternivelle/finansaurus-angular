@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Router} from "@angular/router";
 import {Observable} from "rxjs";
 import {User} from "../../../auth/model/user";
@@ -17,13 +17,12 @@ export class AuthenticationService {
   }
 
   login(password: string): Observable<any> {
-    return this.httpClient.post(environment.baseUrl + 'login', {password: password})
-      .pipe(map(user => {
-        if (user) {
-          sessionStorage.setItem('user', JSON.stringify(new User(window.btoa('user:' + password))));
-          this.loggedIn = true;
-        }
-        return user;
+    const encodedAuth = window.btoa('user:' + password);
+    const headers: HttpHeaders = new HttpHeaders({'Authorization': 'Basic ' + encodedAuth});
+    return this.httpClient.head(environment.baseUrl + 'login', {headers: headers})
+      .pipe(map(() => {
+        sessionStorage.setItem('user', JSON.stringify(new User(encodedAuth)));
+        this.loggedIn = true;
       }));
   }
 
