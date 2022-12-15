@@ -14,3 +14,11 @@
 .link {
   text-decoration: underline;
 }
+
+.positive {
+  color: #42cb4c;
+}
+
+.negative {
+  color: #aa8cde;
+}
