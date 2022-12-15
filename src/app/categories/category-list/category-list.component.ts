@@ -29,7 +29,7 @@ export class CategoryListComponent implements OnInit {
   private load() {
     this.categoryService.listWithoutSystem()
       .subscribe(categories => {
-        this.categories = categories;
+        this.categories = this.orderCategories(categories);
 
         // Collect the parent categories
         this.categories.filter(cat => cat.parent == null).forEach((category: Category) => {
@@ -50,6 +50,53 @@ export class CategoryListComponent implements OnInit {
             this.notificationService.openSnackBar(category.name + ' is deleted');
           });
       }
+    });
+  }
+
+
+  private orderCategories(categories: Category[]): Category[] {
+    if (!categories) {
+      return categories;
+    }
+
+    let result: Category[] = [];
+    const orderedMap: Map<number, Category[]> = new Map<number, Category[]>();
+
+    // Fill the map with the keys
+    categories.filter(cat => !cat.parent).forEach((category: Category) => {
+      orderedMap.set(category.id!, []);
+    });
+
+    // Fill the entries with the categories who have a parent
+    categories.filter(category => category.parent).forEach(category => {
+      if (orderedMap.has(category.parent!)) {
+        orderedMap.get(category.parent!)!.push(category);
+      }
+    });
+
+    // Create the resulting array
+    orderedMap.forEach((value, key) => {
+      const parent = categories.find(cat => cat.id === key)!;
+      result.push(parent);
+
+      // Push kids but sorted
+      result = result.concat(this.sortCategories(value));
+    });
+
+    return result;
+  };
+
+  private sortCategories(categories: Category[]): Category[] {
+    return categories.sort((c1: Category, c2: Category) => {
+      if (c1.name > c2.name) {
+        return 1;
+      }
+
+      if (c1.name < c2.name) {
+        return -1;
+      }
+
+      return 0;
     });
   }
 }
