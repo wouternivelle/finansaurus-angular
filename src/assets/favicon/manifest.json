@@ -2,7 +2,7 @@
  "name": "Finansaurus",
  "icons": [
   {
-   "src": "\/android-icon-64x64.png",
+   "src": "\/favicon-64x64.png",
    "sizes": "64x64",
    "type": "image\/png",
    "density": "1.5"
