@@ -2,6 +2,7 @@ import {TransactionService} from './transaction.service';
 import {of} from 'rxjs';
 import {Transaction, TransactionType} from '../../../transactions/model/transaction';
 import {environment} from "../../../../environments/environment";
+import * as moment from 'moment';
 
 describe('TransactionService', () => {
   let service: TransactionService;
@@ -23,7 +24,10 @@ describe('TransactionService', () => {
   });
 
   it('should list the transactions', done => {
-    httpClient.get.mockReturnValueOnce(of({_embedded: {transactions: [transaction]}, page: {number: 0, size: 10, totalElements: 2, totalPages: 1}}));
+    httpClient.get.mockReturnValueOnce(of({
+      _embedded: {transactions: [transaction]},
+      page: {number: 0, size: 10, totalElements: 2, totalPages: 1}
+    }));
 
     service.list(0, 10).subscribe(result => {
       expect(result.transactions.length).toEqual(1);
@@ -49,9 +53,20 @@ describe('TransactionService', () => {
   it('should save transaction', done => {
     httpClient.post.mockReturnValueOnce(of(transaction));
 
+    const payload = {
+      "accountId": transaction.accountId,
+      "amount": transaction.amount,
+      "categoryId": transaction.categoryId,
+      "date": moment(transaction.date).format("YYYY-MM-DD"),
+      "id": transaction.id,
+      "note": transaction.note,
+      "payeeName": transaction.payeeName,
+      "type": transaction.type.valueOf(),
+    };
+
     service.save(transaction).subscribe(result => {
       expect(result).toEqual(transaction);
-      expect(httpClient.post).toHaveBeenCalledWith(environment.apiURL + 'transactions', transaction);
+      expect(httpClient.post).toHaveBeenCalledWith(environment.apiURL + 'transactions', payload);
       done();
     });
   });

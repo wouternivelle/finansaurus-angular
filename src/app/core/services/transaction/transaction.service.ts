@@ -5,6 +5,7 @@ import {Transaction} from '../../../transactions/model/transaction';
 import {environment} from "../../../../environments/environment";
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {TransactionsPage} from "../../../transactions/model/transactions.page";
+import * as moment from 'moment';
 
 @Injectable({providedIn: 'root'})
 export class TransactionService {
@@ -24,8 +25,12 @@ export class TransactionService {
       }));
   }
 
-  public save(account: Transaction): Observable<Transaction> {
-    return this.http.post<Transaction>(environment.apiURL + 'transactions', account);
+  public save(transaction: Transaction): Observable<Transaction> {
+    const date = moment(transaction.date).format('YYYY-MM-DD');
+    const payload = JSON.parse(JSON.stringify(transaction));
+    payload.date = date;
+
+    return this.http.post<Transaction>(environment.apiURL + 'transactions', payload);
   }
 
   public fetch(id: number): Observable<Transaction> {
