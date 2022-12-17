@@ -35,8 +35,8 @@ export class TransactionListComponent extends BaseDirective implements OnInit {
 
   pageLength = 0;
   pageIndex = 0;
-  pageSize = 5;
-  pageSizeOptions = [1,5,10];
+  pageSize = 15;
+  pageSizeOptions = [15, 30, 50];
 
   displayedColumns = ['date', 'amount', 'category', 'payee', 'note', 'actions'];
 
