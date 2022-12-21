@@ -28,4 +28,4 @@ jobs:
 
       - name: Push new version
         run: |
-          git push --follow-tags
+          git push "https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}" "${{ github.head_ref }}" --follow-tags
