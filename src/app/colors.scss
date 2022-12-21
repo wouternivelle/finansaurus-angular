@@ -1,10 +1,10 @@
 $black: #000000;
 $white: #ffffff;
 $custom-primary: #689F38;
-$custom-accent: #CDDC39;
+$custom-accent: #486689;
 $custom-warn: #ff5722;
 
-$custom-brand-primary: (
+$finansaurus-primary: (
   50: '#edf3e7',
   100: '#d2e2c3',
   200: '#b4cf9c',
@@ -29,17 +29,17 @@ $custom-brand-primary: (
   )
 );
 
-$custom-brand-accent: (
-  50: '#f9fbe7',
-  100: '#f0f5c4',
-  200: '#e6ee9c',
-  300: '#dce774',
-  400: '#d5e157',
+$finansaurus-accent: (
+  50: '#e9edf1',
+  100: '#c8d1dc',
+  200: '#a4b3c4',
+  300: '#7f94ac',
+  400: '#637d9b',
   500: $custom-accent,
-  600: '#c8d833',
-  700: '#c1d32c',
-  800: '#bace24',
-  900: '#aec517',
+  600: '#415e81',
+  700: '#385376',
+  800: '#30496c',
+  900: '#213859',
   contrast: (
     50: $black,
     100: $black,
@@ -54,7 +54,7 @@ $custom-brand-accent: (
   )
 );
 
-$custom-brand-warn: (
+$finansaurus-warn: (
   50: #fbe9e7,
   100: #ffccbc,
   200: #ffab91,

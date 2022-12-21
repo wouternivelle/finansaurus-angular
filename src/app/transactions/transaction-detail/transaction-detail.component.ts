@@ -82,7 +82,6 @@ export class TransactionDetailComponent extends BaseDirective implements OnInit 
       observables.push(this.transactionService.fetch(transactionId));
     }
 
-
     // Fetch all the data
     combineLatest(observables)
       .subscribe(([accounts, categories, payees, transaction]) => {
@@ -139,7 +138,7 @@ export class TransactionDetailComponent extends BaseDirective implements OnInit 
     this.transactionForm.get('type')!.setValue(transaction.type);
   }
 
-  onSubmit() {
+  onSubmit(addAnother = false) {
     const foundCategory = this.categories.find(category => category.name === this.transactionForm.get('category')!.value);
     const transactionId = Number(this.route.snapshot.params['id']);
 
@@ -157,9 +156,24 @@ export class TransactionDetailComponent extends BaseDirective implements OnInit 
     this.transactionService.save(transaction)
       .subscribe(savedTransaction => {
         const result = this.edit ? 'updated' : 'added';
-        this.notificationService.openSnackBar('Transaction ' + savedTransaction.id + ' is ' + result);
-        this.router.navigate(['transactions']);
+        this.notificationService.openSnackBar('Transaction for ' + transaction.payeeName + ' is ' + result);
+        if (addAnother) {
+          this.resetForm(transaction);
+        } else {
+          this.router.navigate(['transactions']);
+        }
       });
+  }
+
+  private resetForm(transaction: Transaction) {
+    this.transactionForm.reset();
+    this.useStarredAccount();
+    this.transactionForm.get('date')?.setValue(moment(transaction.date));
+    this.transactionForm.get('category')!.setValidators([
+      Validators.required,
+      categoryKnownValidator(this.categories)
+    ]);
+    this.transactionForm.get('type')?.setValue(TransactionType.OUT);
   }
 
   doFilterPayees(): void {

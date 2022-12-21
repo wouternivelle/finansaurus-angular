@@ -4,8 +4,8 @@
 @import 'src/app/colors';
 
 /* ======== Angular material custom themes ======== */
-$app-primary: mat.define-palette($custom-brand-primary);
-$app-accent: mat.define-palette($custom-brand-accent);
-$app-warn: mat.define-palette($custom-brand-warn);
-$brand-light-theme: mat.define-dark-theme($app-primary, $app-accent, $app-warn);
-@include mat.all-component-themes($brand-light-theme);
+$app-primary: mat.define-palette($finansaurus-primary);
+$app-accent: mat.define-palette($finansaurus-accent);
+$app-warn: mat.define-palette($finansaurus-warn);
+$finansaurus-dark-theme: mat.define-dark-theme($app-primary, $app-accent, $app-warn);
+@include mat.all-component-themes($finansaurus-dark-theme);

@@ -78,13 +78,19 @@
               </div>
 
               <div class="form-group button-row">
-                <button mat-raised-button class="btn" type="reset">
+                <button mat-button class="btn" type="reset">
                   Reset
                 </button>
                 <button style="margin-left: 20px" mat-raised-button color="primary" class="btn btn-success"
                         type="submit"
                         [disabled]="!transactionForm.valid">
                   {{edit ? 'Update' : 'Add'}}
+                </button>
+                <button style="margin-left: 20px" mat-raised-button color="accent" class="btn btn-success"
+                        type="button"
+                        (click)="onSubmit(true)"
+                        [disabled]="!transactionForm.valid">
+                  Add another
                 </button>
               </div>
             </form>
