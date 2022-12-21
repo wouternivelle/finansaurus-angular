@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit {
         },
         error: () => {
           this.loginForm.get('password')?.setValue('');
-          this.notificationService.openSnackBar("Incorrect password, please try again.");
+          this.notificationService.notify("Incorrect password, please try again.");
           this.loading = false;
         }
       });

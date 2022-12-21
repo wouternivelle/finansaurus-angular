@@ -1,5 +1,4 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {BaseDirective} from '../../shared/base.directive';
 import {ConfirmDialogComponent} from '../../shared/confirm-dialog/confirm-dialog.component';
 import {MatDialog} from '@angular/material/dialog';
 import {PayeeService} from '../../core/services/payee/payee.service';
@@ -23,7 +22,7 @@ import {TransactionsPage} from "../model/transactions.page";
   templateUrl: './transaction-list.component.html',
   styleUrls: ['./transaction-list.component.css']
 })
-export class TransactionListComponent extends BaseDirective implements OnInit {
+export class TransactionListComponent implements OnInit {
   transactions: Transaction[] = [];
   datasource: MatTableDataSource<Transaction> = new MatTableDataSource<Transaction>([]);
   selectedAccountId: number | undefined;
@@ -50,7 +49,6 @@ export class TransactionListComponent extends BaseDirective implements OnInit {
               private accountService: AccountService,
               private dialog: MatDialog,
               private notificationService: NotificationService) {
-    super();
   }
 
   ngOnInit(): void {
@@ -86,7 +84,7 @@ export class TransactionListComponent extends BaseDirective implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result && transaction.id) {
         this.transactionService.delete(transaction.id).subscribe(() => {
-          this.notificationService.openSnackBar('Transaction is deleted');
+          this.notificationService.notify('Transaction is deleted');
           this.loadTransactions();
         });
       }

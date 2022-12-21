@@ -27,7 +27,7 @@ describe('TransactionDetailComponent', () => {
     navigate: jest.fn()
   };
   const notificationService: any = {
-    openSnackBar: jest.fn()
+    notify: jest.fn()
   };
   const route: any = {
     'snapshot': {
@@ -44,7 +44,7 @@ describe('TransactionDetailComponent', () => {
       payeeService, transactionService, notificationService, route, router);
 
     transactionService.save.mockClear();
-    notificationService.openSnackBar.mockClear();
+    notificationService.notify.mockClear();
   });
 
   it('should create', () => {
@@ -94,7 +94,7 @@ describe('TransactionDetailComponent', () => {
     await component.onSubmit();
 
     expect(transactionService.save).toHaveBeenCalledWith(new Transaction(50.69, TransactionType.OUT, date, 'payee 1', 1, 1, 1, ''));
-    expect(notificationService.openSnackBar).toHaveBeenCalled();
+    expect(notificationService.notify).toHaveBeenCalled();
     expect(router.navigate).toHaveBeenCalled();
   });
 

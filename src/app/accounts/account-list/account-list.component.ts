@@ -47,7 +47,7 @@ export class AccountListComponent implements OnInit {
       if (result && account.id) {
         this.accountService.delete(account.id)
           .subscribe(() => {
-            this.notificationService.openSnackBar(account.name + ' is deleted');
+            this.notificationService.notify(account.name + ' is deleted');
             this.load();
           });
       }
@@ -59,7 +59,7 @@ export class AccountListComponent implements OnInit {
 
     this.accountService.save(account)
       .subscribe(() => {
-        this.notificationService.openSnackBar(account.name + ' is starred');
+        this.notificationService.notify(account.name + ' is starred');
         this.load();
       });
   }

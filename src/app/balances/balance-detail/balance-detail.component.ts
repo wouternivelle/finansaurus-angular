@@ -1,5 +1,4 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {BaseDirective} from '../../shared/base.directive';
 import {combineLatest, Observable} from 'rxjs';
 import {Balance, BalanceCategory} from '../model/balance';
 import {BalanceService} from '../../core/services/balance/balance.service';
@@ -16,7 +15,7 @@ import {BalanceTransactionDialogComponent} from '../balance-transaction-dialog/b
   templateUrl: './balance-detail.component.html',
   styleUrls: ['./balance-detail.component.css']
 })
-export class BalanceDetailComponent extends BaseDirective implements OnInit {
+export class BalanceDetailComponent implements OnInit {
   balance: Balance | undefined;
   categories: Category[] = [];
 
@@ -34,7 +33,6 @@ export class BalanceDetailComponent extends BaseDirective implements OnInit {
               private categoryService: CategoryService,
               private transactionService: TransactionService,
               private dialog: MatDialog) {
-    super();
   }
 
   ngOnInit() {
@@ -61,7 +59,7 @@ export class BalanceDetailComponent extends BaseDirective implements OnInit {
     this.balanceService.updateBudget(this.balance!, categoryId, Number(value), this.categories.map(c => c.id!))
       .subscribe(balance => {
         this.balance = balance;
-        this.notificationService.openSnackBar(categoryName + ' is updated with ' + value);
+        this.notificationService.notify(categoryName + ' is updated with ' + value);
       });
   }
 
@@ -102,7 +100,7 @@ export class BalanceDetailComponent extends BaseDirective implements OnInit {
   onUsePreviousValues(): void {
     this.balanceService.usePreviousMonthValues(this.balance!)
       .subscribe(() => {
-        this.notificationService.openSnackBar('The values for the previous month have been used.');
+        this.notificationService.notify('The values for the previous month have been used.');
       });
   }
 

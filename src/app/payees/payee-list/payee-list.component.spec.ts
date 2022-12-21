@@ -14,13 +14,13 @@ describe('BalanceDetailComponent', () => {
     open: jest.fn()
   };
   const notificationService: any = {
-    openSnackBar: jest.fn()
+    notify: jest.fn()
   };
 
   beforeEach(() => {
     component = new PayeeListComponent(payeeService, matDialog, notificationService);
 
-    notificationService.openSnackBar.mockClear();
+    notificationService.notify.mockClear();
     payeeService.delete.mockClear();
   });
 
@@ -54,7 +54,7 @@ describe('BalanceDetailComponent', () => {
     expect(matDialog.open).toHaveBeenCalled();
     expect(payeeService.delete).toHaveBeenCalled();
     expect(payeeService.list).toHaveBeenCalled();
-    expect(notificationService.openSnackBar).toHaveBeenCalled();
+    expect(notificationService.notify).toHaveBeenCalled();
   });
 
   it('should not delete a payee after rejection', async () => {
@@ -71,6 +71,6 @@ describe('BalanceDetailComponent', () => {
 
     expect(matDialog.open).toHaveBeenCalled();
     expect(payeeService.delete).not.toHaveBeenCalled();
-    expect(notificationService.openSnackBar).not.toHaveBeenCalled();
+    expect(notificationService.notify).not.toHaveBeenCalled();
   });
 });

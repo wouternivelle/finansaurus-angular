@@ -52,7 +52,7 @@ export class PayeeDetailComponent implements OnInit {
     this.payeeService.save(payee)
       .subscribe(savedPayee => {
         const result = this.edit ? 'updated' : 'added';
-        this.notificationService.openSnackBar(savedPayee.name + ' is ' + result);
+        this.notificationService.notify(savedPayee.name + ' is ' + result);
         this.router.navigate(['payees']);
       });
 

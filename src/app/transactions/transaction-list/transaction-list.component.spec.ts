@@ -26,7 +26,7 @@ describe('TransactionListComponent', () => {
     open: jest.fn()
   };
   const notificationService: any = {
-    openSnackBar: jest.fn()
+    notify: jest.fn()
   };
   const route: any = {
     'snapshot': {
@@ -41,7 +41,7 @@ describe('TransactionListComponent', () => {
   beforeEach(() => {
     component = new TransactionListComponent(transactionService, route, categoryService, payeeService, accountService, matDialog, notificationService);
 
-    notificationService.openSnackBar.mockClear();
+    notificationService.notify.mockClear();
     transactionService.delete.mockClear();
   });
 
@@ -79,7 +79,7 @@ describe('TransactionListComponent', () => {
 
     expect(matDialog.open).toHaveBeenCalled();
     expect(transactionService.delete).toHaveBeenCalled();
-    expect(notificationService.openSnackBar).toHaveBeenCalled();
+    expect(notificationService.notify).toHaveBeenCalled();
     expect(transactionService.list).toHaveBeenCalled();
   });
 
@@ -97,6 +97,6 @@ describe('TransactionListComponent', () => {
 
     expect(matDialog.open).toHaveBeenCalled();
     expect(transactionService.delete).not.toHaveBeenCalled();
-    expect(notificationService.openSnackBar).not.toHaveBeenCalled();
+    expect(notificationService.notify).not.toHaveBeenCalled();
   });
 });

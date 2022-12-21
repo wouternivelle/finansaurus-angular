@@ -48,7 +48,7 @@ export class AccountDetailComponent implements OnInit {
 
     this.accountService.save(account)
       .subscribe(account => {
-        this.notificationService.openSnackBar('Account ' + account.name ? 'updated' : 'added');
+        this.notificationService.notify('Account ' + account.name ? 'updated' : 'added');
         this.router.navigate(['accounts']);
       });
   }

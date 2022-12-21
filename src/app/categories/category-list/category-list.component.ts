@@ -48,7 +48,7 @@ export class CategoryListComponent implements OnInit {
       if (result && category.id) {
         this.categoryService.delete(category.id)
           .subscribe(() => {
-            this.notificationService.openSnackBar(category.name + ' is deleted');
+            this.notificationService.notify(category.name + ' is deleted');
           });
       }
     });

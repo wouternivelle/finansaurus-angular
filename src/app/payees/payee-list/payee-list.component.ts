@@ -33,7 +33,7 @@ export class PayeeListComponent implements OnInit {
       if (result && payee.id) {
         this.payeeService.delete(payee.id)
           .subscribe(() => {
-            this.notificationService.openSnackBar(payee.name + ' is deleted');
+            this.notificationService.notify(payee.name + ' is deleted');
             this.load();
           });
       }

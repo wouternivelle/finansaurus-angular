@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
-import {BaseDirective} from '../../shared/base.directive';
 import {CategoryService} from '../../core/services/category/category.service';
 import {NotificationService} from '../../core/services/notification.service';
 import {Payee} from '../../payees/model/payee';
@@ -39,7 +38,7 @@ export const DATE_FORMATS = {
     {provide: MAT_DATE_FORMATS, useValue: DATE_FORMATS},
   ]
 })
-export class TransactionDetailComponent extends BaseDirective implements OnInit {
+export class TransactionDetailComponent implements OnInit {
   categories: Category[] = [];
   accounts: Account[] = [];
   payees: Payee[] = [];
@@ -70,7 +69,6 @@ export class TransactionDetailComponent extends BaseDirective implements OnInit 
               private notificationService: NotificationService,
               private route: ActivatedRoute,
               private router: Router) {
-    super();
   }
 
   ngOnInit() {
@@ -156,7 +154,7 @@ export class TransactionDetailComponent extends BaseDirective implements OnInit 
     this.transactionService.save(transaction)
       .subscribe(savedTransaction => {
         const result = this.edit ? 'updated' : 'added';
-        this.notificationService.openSnackBar('Transaction for ' + transaction.payeeName + ' is ' + result);
+        this.notificationService.notify('Transaction for ' + transaction.payeeName + ' is ' + result);
         if (addAnother) {
           this.resetForm(transaction);
         } else {

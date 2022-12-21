@@ -13,7 +13,7 @@ describe('CategoryDetailComponent', () => {
     navigate: jest.fn()
   };
   const notificationService: any = {
-    openSnackBar: jest.fn()
+    notify: jest.fn()
   };
   const route: any = {
     'snapshot': {
@@ -53,7 +53,7 @@ describe('CategoryDetailComponent', () => {
     await component.onSubmit();
 
     expect(categoryService.save).toHaveBeenCalled();
-    expect(notificationService.openSnackBar).toHaveBeenCalled();
+    expect(notificationService.notify).toHaveBeenCalled();
     expect(router.navigate).toHaveBeenCalled();
   });
 });

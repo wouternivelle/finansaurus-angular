@@ -2,7 +2,6 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Router} from "@angular/router";
 import {Observable} from "rxjs";
-import {User} from "../../../auth/model/user";
 import {map} from "rxjs/operators";
 import {environment} from "../../../../environments/environment";
 
@@ -11,7 +10,7 @@ export class AuthenticationService {
   loggedIn = false;
 
   constructor(private httpClient: HttpClient, private router: Router) {
-    if (sessionStorage.getItem('user')) {
+    if (sessionStorage.getItem('auth')) {
       this.loggedIn = true;
     }
   }
@@ -21,7 +20,7 @@ export class AuthenticationService {
     const headers: HttpHeaders = new HttpHeaders({'Authorization': 'Basic ' + encodedAuth});
     return this.httpClient.head(environment.apiURL + 'login', {headers: headers})
       .pipe(map(() => {
-        sessionStorage.setItem('user', JSON.stringify(new User(encodedAuth)));
+        sessionStorage.setItem('auth', encodedAuth);
         this.loggedIn = true;
       }));
   }

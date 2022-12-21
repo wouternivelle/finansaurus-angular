@@ -10,7 +10,7 @@ describe('CategoryListComponent', () => {
     delete: jest.fn(),
   };
   const notificationService: any = {
-    openSnackBar: jest.fn()
+    notify: jest.fn()
   };
   const matDialog: any = {
     open: jest.fn()
@@ -19,7 +19,7 @@ describe('CategoryListComponent', () => {
   beforeEach(() => {
     component = new CategoryListComponent(categoryService, matDialog, notificationService);
 
-    notificationService.openSnackBar.mockClear();
+    notificationService.notify.mockClear();
     categoryService.delete.mockClear();
   });
 
@@ -57,7 +57,7 @@ describe('CategoryListComponent', () => {
 
     expect(matDialog.open).toHaveBeenCalled();
     expect(categoryService.delete).toHaveBeenCalled();
-    expect(notificationService.openSnackBar).toHaveBeenCalled();
+    expect(notificationService.notify).toHaveBeenCalled();
   });
 
   it('should not delete a category after rejection', async () => {
@@ -75,6 +75,6 @@ describe('CategoryListComponent', () => {
 
     expect(matDialog.open).toHaveBeenCalled();
     expect(categoryService.delete).not.toHaveBeenCalled();
-    expect(notificationService.openSnackBar).not.toHaveBeenCalled();
+    expect(notificationService.notify).not.toHaveBeenCalled();
   });
 });

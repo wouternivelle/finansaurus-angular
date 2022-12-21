@@ -61,7 +61,7 @@ export class CategoryDetailComponent implements OnInit {
 
     this.categoryService.save(category)
       .subscribe(() => {
-        this.notificationService.openSnackBar('Category ' + category.name ? 'updated' : 'added');
+        this.notificationService.notify('Category ' + category.name ? 'updated' : 'added');
         this.router.navigate(['categories']);
       });
   }

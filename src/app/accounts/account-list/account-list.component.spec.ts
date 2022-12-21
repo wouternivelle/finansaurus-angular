@@ -14,7 +14,7 @@ describe('AccountListComponent', () => {
     save: jest.fn()
   };
   const notificationService: any = {
-    openSnackBar: jest.fn()
+    notify: jest.fn()
   };
   const matDialog: any = {
     open: jest.fn()
@@ -24,7 +24,7 @@ describe('AccountListComponent', () => {
     component = new AccountListComponent(accountService, matDialog, notificationService);
 
     accountService.delete.mockClear();
-    notificationService.openSnackBar.mockClear();
+    notificationService.notify.mockClear();
   });
 
   it('should create', () => {
@@ -65,7 +65,7 @@ describe('AccountListComponent', () => {
 
     expect(matDialog.open).toHaveBeenCalled();
     expect(accountService.delete).toHaveBeenCalled();
-    expect(notificationService.openSnackBar).toHaveBeenCalled();
+    expect(notificationService.notify).toHaveBeenCalled();
   });
 
   it('should not delete an account after rejection', async () => {
@@ -82,7 +82,7 @@ describe('AccountListComponent', () => {
 
     expect(matDialog.open).toHaveBeenCalled();
     expect(accountService.delete).not.toHaveBeenCalled();
-    expect(notificationService.openSnackBar).not.toHaveBeenCalled();
+    expect(notificationService.notify).not.toHaveBeenCalled();
   });
 
   it('should star an account', async () => {
@@ -93,7 +93,7 @@ describe('AccountListComponent', () => {
     await component.onStar(account);
 
     expect(accountService.save).toHaveBeenCalledWith(account);
-    expect(notificationService.openSnackBar).toHaveBeenCalled();
+    expect(notificationService.notify).toHaveBeenCalled();
     expect(account.starred).toEqual(true);
   });
 });

@@ -15,7 +15,7 @@ describe('BalanceDetailComponent', () => {
     usePreviousMonthValues: jest.fn()
   };
   const notificationService: any = {
-    openSnackBar: jest.fn()
+    notify: jest.fn()
   };
   const transactionService: any = {
     listIncomingTransactionsForBalance: jest.fn()
@@ -34,7 +34,7 @@ describe('BalanceDetailComponent', () => {
   beforeEach(() => {
     component = new BalanceDetailComponent(balanceService, notificationService, categoryService, transactionService, dialog);
 
-    notificationService.openSnackBar.mockClear();
+    notificationService.notify.mockClear();
   });
 
   it('should create', () => {
@@ -72,7 +72,7 @@ describe('BalanceDetailComponent', () => {
 
     expect(component).toBeTruthy();
     expect(balanceService.updateBudget).toHaveBeenCalledWith(balance, 2, 123, [1, 2]);
-    expect(notificationService.openSnackBar).toHaveBeenCalled();
+    expect(notificationService.notify).toHaveBeenCalled();
   });
 
   it('should determine the balance for a category', () => {

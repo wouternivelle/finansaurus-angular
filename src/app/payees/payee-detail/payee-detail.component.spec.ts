@@ -14,7 +14,7 @@ describe('PayeeDetailComponent', () => {
     navigate: jest.fn()
   };
   const notificationService: any = {
-    openSnackBar: jest.fn()
+    notify: jest.fn()
   };
 
   const route: any = {
@@ -51,7 +51,7 @@ describe('PayeeDetailComponent', () => {
     await component.onSubmit();
 
     expect(payeeService.save).toHaveBeenCalled();
-    expect(notificationService.openSnackBar).toHaveBeenCalled();
+    expect(notificationService.notify).toHaveBeenCalled();
     expect(router.navigate).toHaveBeenCalled();
   });
 });
