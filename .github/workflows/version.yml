@@ -1,4 +1,4 @@
-name: Main Build
+name: Version Increase
 
 on:
   workflow_dispatch:
