@@ -41,7 +41,7 @@ jobs:
 
       - name: Commit version
         run: |
-          git commit -m "Version upgraded to ${{ github.event.inputs.new_version }}"
+          git commit -a -m "Version upgraded to ${{ github.event.inputs.new_version }}"
 
       - name: Push tag and new version
         run: |
