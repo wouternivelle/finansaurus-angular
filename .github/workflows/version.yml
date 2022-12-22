@@ -37,8 +37,13 @@ jobs:
 
       - name: Increase version
         run: |
-          npm --no-git-tag-version version ${{ github.event.inputs.new_version }} -m "Upgrade version to %s"
+          npm --no-git-tag-version version ${{ github.event.inputs.new_version }}
+
+      - name: Commit version
+        run: |
+          git commit -m "Version upgraded to ${{ github.event.inputs.new_version }}"
 
       - name: Push tag and new version
         run: |
-          git push --follow-tags
+          git push
+          git push origin --tags
