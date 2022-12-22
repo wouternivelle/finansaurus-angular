@@ -26,10 +26,6 @@ export class BalanceService {
   }
 
   public updateBudget(balance: Balance, categoryId: number, value: number, categoryIds: number[]): Observable<Balance> {
-    if (!balance.categories) {
-      balance.categories = [];
-    }
-
     this.cleanCategories(balance, categoryIds);
 
     const balanceCategory = balance.categories

@@ -17,7 +17,7 @@ describe('CategoryDetailComponent', () => {
   };
   const route: any = {
     'snapshot': {
-      'params': {'id': '1'}
+      'params': {'id': 2}
     }
   };
 
@@ -30,17 +30,18 @@ describe('CategoryDetailComponent', () => {
     expect(component.categories).toBeDefined();
   });
 
-  it('should init', () => {
+  it('should init', async () => {
     const parent = new Category('parent', CategoryType.GENERAL, false, false, 1, null);
     const child = new Category('child', CategoryType.GENERAL, false, false, 2, 1);
 
     categoryService.listWithoutSystem.mockReturnValueOnce(of([parent, child]));
 
-    component.ngOnInit();
+    await component.ngOnInit();
 
     expect(categoryService.listWithoutSystem).toHaveBeenCalled();
 
     expect(component.parentCategories.get(1)).toEqual('parent');
+    expect(component.hasParent).toEqual(true);
   });
 
   it('should create a new category on submit', async () => {
@@ -53,7 +54,20 @@ describe('CategoryDetailComponent', () => {
     await component.onSubmit();
 
     expect(categoryService.save).toHaveBeenCalled();
-    expect(notificationService.notify).toHaveBeenCalled();
+    expect(notificationService.notify).toHaveBeenCalledWith('Category parent saved');
+    expect(router.navigate).toHaveBeenCalled();
+  });
+
+  it('should create a new parent category on submit', async () => {
+    const category = new Category('parent', CategoryType.GENERAL, false, false, 1, null);
+    component.categoryForm.get('name')!.setValue('name1');
+
+    categoryService.save.mockReturnValueOnce(of(category));
+
+    await component.onSubmit();
+
+    expect(categoryService.save).toHaveBeenCalled();
+    expect(notificationService.notify).toHaveBeenCalledWith('Category parent saved');
     expect(router.navigate).toHaveBeenCalled();
   });
 });

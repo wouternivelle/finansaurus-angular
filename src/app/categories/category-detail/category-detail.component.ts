@@ -60,8 +60,8 @@ export class CategoryDetailComponent implements OnInit {
     const category = new Category(this.categoryForm.get('name')!.value!, CategoryType.GENERAL, false, this.categoryForm.get('hidden')!.value!, categoryId, parent);
 
     this.categoryService.save(category)
-      .subscribe(() => {
-        this.notificationService.notify('Category ' + category.name ? 'updated' : 'added');
+      .subscribe(category => {
+        this.notificationService.notify('Category ' + category.name + ' saved');
         this.router.navigate(['categories']);
       });
   }

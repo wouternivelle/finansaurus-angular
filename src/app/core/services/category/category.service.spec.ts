@@ -52,6 +52,16 @@ describe('CategoryService', () => {
     });
   });
 
+  it('should list 0 system categories when no _embedded present', done => {
+    httpClient.get.mockReturnValueOnce(of({_test: []}));
+
+    service.listWithoutSystem().subscribe(result => {
+      expect(result.length).toEqual(0);
+      expect(httpClient.get).toHaveBeenCalledWith(environment.apiURL + 'categories/no-system');
+      done();
+    });
+  });
+
   it('should save category', done => {
     httpClient.post.mockReturnValueOnce(of(category));
 

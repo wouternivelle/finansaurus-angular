@@ -51,7 +51,7 @@ describe('PayeeDetailComponent', () => {
     await component.onSubmit();
 
     expect(payeeService.save).toHaveBeenCalled();
-    expect(notificationService.notify).toHaveBeenCalled();
+    expect(notificationService.notify).toHaveBeenCalledWith("Payee payee 1 saved");
     expect(router.navigate).toHaveBeenCalled();
   });
 });

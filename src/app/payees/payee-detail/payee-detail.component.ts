@@ -30,29 +30,18 @@ export class PayeeDetailComponent implements OnInit {
       this.edit = true;
       this.payeeService.fetch(payeeId)
         .subscribe(payee => {
-          let nameControl = this.payeeForm.get('name');
-          if (!nameControl) {
-            throw new Error('Form has not been correctly initialized.');
-          }
-
-          nameControl.setValue(payee.name);
+          this.payeeForm.get('name')!.setValue(payee.name);
         });
     }
   }
 
   onSubmit() {
-    let nameControl = this.payeeForm.get('name');
-    if (!nameControl || !nameControl.value) {
-      throw new Error('Form has not been correctly initialized.');
-    }
-
     const payeeId: number = Number(this.route.snapshot.params['id']);
-    const payee = new Payee(nameControl.value, payeeId);
+    const payee = new Payee(this.payeeForm.get('name')!.value!, payeeId);
 
     this.payeeService.save(payee)
-      .subscribe(savedPayee => {
-        const result = this.edit ? 'updated' : 'added';
-        this.notificationService.notify(savedPayee.name + ' is ' + result);
+      .subscribe(payee => {
+        this.notificationService.notify('Payee ' + payee.name + ' saved');
         this.router.navigate(['payees']);
       });
 

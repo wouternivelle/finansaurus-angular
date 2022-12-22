@@ -112,10 +112,6 @@ export class TransactionDetailComponent implements OnInit {
         }
       });
 
-    if (transactionId) {
-      this.edit = true;
-    }
-
     this.onChange();
   }
 
@@ -152,9 +148,8 @@ export class TransactionDetailComponent implements OnInit {
     );
 
     this.transactionService.save(transaction)
-      .subscribe(savedTransaction => {
-        const result = this.edit ? 'updated' : 'added';
-        this.notificationService.notify('Transaction for ' + transaction.payeeName + ' is ' + result);
+      .subscribe(() => {
+        this.notificationService.notify('Transaction for ' + transaction.payeeName + ' saved');
         if (addAnother) {
           this.resetForm(transaction);
         } else {

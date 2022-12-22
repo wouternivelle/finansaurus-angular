@@ -60,6 +60,18 @@ describe('BalanceService', () => {
       [new BalanceCategory(1, 1, 0, 1), new BalanceCategory(2, 2, 0, 2)]);
     httpClient.post.mockReturnValueOnce(of(balance));
 
+    service.updateBudget(balance, 2, 3, [1, 2]).subscribe(result => {
+      expect(httpClient.post).toHaveBeenCalled();
+      expect(result.categories[1].budgeted).toBe(3);
+      done();
+    });
+  });
+
+  it('should remove invalid categories when updating', done => {
+    const balance = new Balance(new Date().getMonth(), new Date().getFullYear(), 0, 0,
+      [new BalanceCategory(1, 1, 0, 1), new BalanceCategory(2, 2, 0, 2)]);
+    httpClient.post.mockReturnValueOnce(of(balance));
+
     service.updateBudget(balance, 2, 3, [1]).subscribe(result => {
       expect(httpClient.post).toHaveBeenCalled();
       expect(result.categories[1].budgeted).toBe(3);

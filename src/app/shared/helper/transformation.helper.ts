@@ -1,10 +1,6 @@
 import {Category} from '../../categories/model/category';
 
 export const orderCategories = (categories: Category[]) => {
-  if (!categories) {
-    return categories;
-  }
-
   let result: Category[] = [];
   const orderedMap: Map<number, Category[]> = new Map<number, Category[]>();
 
@@ -40,10 +36,6 @@ function sortCategories(categories: Category[]): Category[] {
       return 1;
     }
 
-    if (c1.name < c2.name) {
-      return -1;
-    }
-
-    return 0;
+    return -1;
   });
 }

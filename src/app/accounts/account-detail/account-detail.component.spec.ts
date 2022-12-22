@@ -5,7 +5,7 @@ import {Account, AccountType} from '../model/account';
 describe('AccountDetailComponent', () => {
   let component: AccountDetailComponent;
 
-  const account = new Account('account 1', AccountType.CHECKINGS, 150, false);
+  const account = new Account('account 1', AccountType.CHECKINGS);
 
   const accountService: any = {
     save: jest.fn(),
@@ -19,7 +19,7 @@ describe('AccountDetailComponent', () => {
   };
   const route: any = {
     'snapshot': {
-      'params': {'id': '1'}
+      'params': {'id': 1}
     }
   };
 
@@ -41,6 +41,12 @@ describe('AccountDetailComponent', () => {
   });
 
   it('should create a new account on submit', async () => {
+    const route: any = {
+      'snapshot': {
+        'params': {'test': 1}
+      }
+    };
+    component = new AccountDetailComponent(route, accountService, router, notificationService);
     component.accountForm.get('name')!.setValue('name1');
     component.accountForm.get('amount')!.setValue('300');
     component.accountForm.get('type')!.setValue('CHECKINGS');
@@ -51,6 +57,6 @@ describe('AccountDetailComponent', () => {
 
     expect(accountService.save).toHaveBeenCalled();
     expect(router.navigate).toHaveBeenCalled();
-    expect(notificationService.notify).toHaveBeenCalled();
+    expect(notificationService.notify).toHaveBeenCalledWith('Account account 1 saved');
   });
 });
