@@ -27,10 +27,18 @@ jobs:
           git config user.name "$(git log -n 1 --pretty=format:%an)"
           git config user.email "$(git log -n 1 --pretty=format:%ae)"
 
+      - name: Checkout main
+        run: |
+          git checkout main
+
+      - name: Tag current version
+        run: |
+          npm run tag
+
       - name: Increase version
         run: |
-          npm version ${{ github.event.inputs.new_version }}
+          npm --no-git-tag-version version ${{ github.event.inputs.new_version }} -m "Upgrade version to %s"
 
-      - name: Push new version
+      - name: Push tag and new version
         run: |
           git push --follow-tags
