@@ -154,3 +154,25 @@ p .mat-icon {
 .negative {
   color: $primary-color;
 }
+
+// Flex row/col + grid.
+.flex-row { display: flex; flex-direction: row; }
+.flex-col { display: flex; flex-direction: column; }
+.grid { display: grid; }
+
+// Flex-wrap utils.
+.flex-wrap { flex-wrap: wrap; }  // Mostly used with flex-row, when wrapping is desired.
+.flex-col-xs { @media screen and (max-width: 599px) { flex-direction: column; } }  // Switch from flex-row to flex-col on mobile.
+
+// Justify content.
+.space-between { justify-content: space-between; }  // Used very often with flex-row.
+.justify-center { justify-content: center; }  // Used to center something via flexbox.
+
+// Align items. (Naming inspiration: https://tailwindcss.com/docs/align-items.)
+.items-center { align-items: center; }  // Used very often with flex-row.
+
+// Flex/grow/shrink properties https://developer.mozilla.org/en-US/docs/Web/CSS/flex.
+.flex-1 { flex: 1 }  // Same as flex: 1 1 0 (grow, shrink, basis 0). Has similar effect to width: 100%;
+.flex-grow { flex-grow: 1; }  // Same as flex: 1 1 auto (grow, shrink, basis auto). For spacer, etc.
+
+.flex-spacing { flex-grow: 0.95; }  // Same as flex: 1 1 auto (grow, shrink, basis auto). For spacer, etc.
