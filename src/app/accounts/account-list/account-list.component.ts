@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {AccountService} from '../../core/services/account/account.service';
 import {Account} from '../model/account';
 import {ConfirmDialogComponent} from '../../shared/confirm-dialog/confirm-dialog.component';
-import {MatDialog} from '@angular/material/dialog';
+import {MatLegacyDialog as MatDialog} from '@angular/material/legacy-dialog';
 import {NotificationService} from '../../core/services/notification.service';
 
 @Component({

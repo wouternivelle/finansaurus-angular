@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ConfirmDialogComponent} from '../../shared/confirm-dialog/confirm-dialog.component';
-import {MatDialog} from '@angular/material/dialog';
+import {MatLegacyDialog as MatDialog} from '@angular/material/legacy-dialog';
 import {Category} from '../model/category';
 import {CategoryService} from '../../core/services/category/category.service';
 import {NotificationService} from '../../core/services/notification.service';
