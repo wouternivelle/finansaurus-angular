@@ -12,6 +12,7 @@ import {PayeeService} from '../../core/services/payee/payee.service';
 })
 export class BalanceTransactionDialogComponent implements OnInit {
 
+  loading = false;
   transactions: Transaction[];
   payeeMap: Map<number, string> = new Map<number, string>();
   datasource: MatTableDataSource<Transaction> = new MatTableDataSource<Transaction>([]);
@@ -24,6 +25,7 @@ export class BalanceTransactionDialogComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.loading = true;
     this.payeeService.list()
       .pipe(take(1))
       .subscribe(payees => {
@@ -32,6 +34,7 @@ export class BalanceTransactionDialogComponent implements OnInit {
         );
 
         this.datasource.data = this.transactions;
+        this.loading = false;
       });
   }
 }

@@ -11,7 +11,7 @@
   padding-left: 30px;
 }
 
-.link {
+.link, .mat-cell .link {
   text-decoration: underline;
 }
 

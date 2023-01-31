@@ -1,4 +1,6 @@
-<mat-table [dataSource]="datasource">
+<mat-spinner style="margin:0 auto;" *ngIf="loading" ></mat-spinner>
+<mat-table [dataSource]="datasource" *ngIf="!loading">
+
   <!-- Date Column -->
   <ng-container matColumnDef="date">
     <mat-header-cell *matHeaderCellDef>Date</mat-header-cell>

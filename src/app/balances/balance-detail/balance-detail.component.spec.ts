@@ -18,7 +18,8 @@ describe('BalanceDetailComponent', () => {
     notify: jest.fn()
   };
   const transactionService: any = {
-    listIncomingTransactionsForBalance: jest.fn()
+    listIncomingTransactionsForBalance: jest.fn(),
+    listTransactionsForMonthAndCategory: jest.fn()
   };
   const categoryService: any = {
     listWithoutSystem: jest.fn(),
@@ -138,10 +139,24 @@ describe('BalanceDetailComponent', () => {
 
     transactionService.listIncomingTransactionsForBalance.mockReturnValue(of([transaction, transaction]));
 
-    await component.loadIncomingTransaction();
+    await component.loadIncomingTransactions();
 
     expect(component).toBeTruthy();
     expect(transactionService.listIncomingTransactionsForBalance).toHaveBeenCalled();
+    expect(dialog.open).toHaveBeenCalled();
+  });
+
+  it('should load the transactions for a month and category and show the dialog', async () => {
+    const transaction = new Transaction(30.25, TransactionType.OUT, new Date(), 'payee 1', 1, 1, 1, 'test');
+
+    component.balance = balance;
+
+    transactionService.listTransactionsForMonthAndCategory.mockReturnValue(of([transaction, transaction]));
+
+    await component.loadTransactions(1);
+
+    expect(component).toBeTruthy();
+    expect(transactionService.listTransactionsForMonthAndCategory).toHaveBeenCalled();
     expect(dialog.open).toHaveBeenCalled();
   });
 

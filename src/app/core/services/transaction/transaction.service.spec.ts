@@ -112,4 +112,24 @@ describe('TransactionService', () => {
       done();
     });
   });
+
+  it('should list the transactions for a month and category', done => {
+    httpClient.get.mockReturnValueOnce(of({_embedded: {transactions: [transaction]}}));
+
+    service.listTransactionsForMonthAndCategory(10, 2022, 1).subscribe(result => {
+      expect(result.length).toEqual(1);
+      expect(httpClient.get).toHaveBeenCalledWith(environment.apiURL + 'transactions/list/2022/11/1');
+      done();
+    });
+  });
+
+  it('should list 0 transactions for a month and category when nothing is found', done => {
+    httpClient.get.mockReturnValueOnce(of({_test: {}}));
+
+    service.listTransactionsForMonthAndCategory(10, 2022, 1).subscribe(result => {
+      expect(result.length).toEqual(0);
+      expect(httpClient.get).toHaveBeenCalledWith(environment.apiURL + 'transactions/list/2022/11/1');
+      done();
+    });
+  });
 });

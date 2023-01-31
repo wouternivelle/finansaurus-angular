@@ -51,4 +51,15 @@ export class TransactionService {
         }
       }));
   }
+
+  public listTransactionsForMonthAndCategory(month: number, year: number, category: number): Observable<Transaction[]> {
+    return this.http.get<any>(environment.apiURL + 'transactions/list/' + year + '/' + (month + 1) + '/' + category)
+      .pipe(map(result => {
+        if (result._embedded) {
+          return result._embedded.transactions as Transaction[];
+        } else {
+          return [];
+        }
+      }));
+  }
 }

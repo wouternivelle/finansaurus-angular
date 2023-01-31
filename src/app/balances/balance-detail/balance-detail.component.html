@@ -2,7 +2,7 @@
   <button mat-raised-button [matMenuTriggerFor]="actions">
     Actions
   </button>
-  <p><a class="link" (click)="loadIncomingTransaction()">{{balance.incoming | currency:'EUR'}} : Income</a></p>
+  <p><a class="link" (click)="loadIncomingTransactions()">{{balance.incoming | currency:'EUR'}} : Income</a></p>
   <p>
     {{balance.budgeted | currency:'EUR'}} Budgeted in {{date | date:'MMMM'}}
   </p>
@@ -42,8 +42,8 @@
       <ng-container matColumnDef="outflow">
         <mat-header-cell *matHeaderCellDef class="left-align">Outflow</mat-header-cell>
         <mat-cell *matCellDef="let category" class="left-align">
-          <ng-container *ngIf="category.parent != null">
-            {{findCategory(balance, category.id).operations | currency:'EUR'}}
+          <ng-container *ngIf="category.parent != null" (click)="loadTransactions(category.id)">
+            <a class="link" (click)="loadTransactions(category.id)">{{findCategory(balance, category.id).operations | currency:'EUR'}}</a>
           </ng-container>
         </mat-cell>
         <mat-footer-cell *matFooterCellDef class="left-align parent-category">{{determineTotalOperations() | currency:'EUR'}}</mat-footer-cell>

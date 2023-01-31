@@ -104,8 +104,18 @@ export class BalanceDetailComponent implements OnInit {
       });
   }
 
-  loadIncomingTransaction(): void {
+  loadIncomingTransactions(): void {
     this.transactionService.listIncomingTransactionsForBalance(this.balance!.month, this.balance!.year)
+      .subscribe(transactions => {
+        this.dialog.open(BalanceTransactionDialogComponent, {
+          width: '500px',
+          data: transactions
+        });
+      });
+  }
+
+  loadTransactions(categoryId: number): void {
+    this.transactionService.listTransactionsForMonthAndCategory(this.balance!.month, this.balance!.year, categoryId)
       .subscribe(transactions => {
         this.dialog.open(BalanceTransactionDialogComponent, {
           width: '500px',
