@@ -99,7 +99,8 @@ export class BalanceDetailComponent implements OnInit {
 
   onUsePreviousValues(): void {
     this.balanceService.usePreviousMonthValues(this.balance!)
-      .subscribe(() => {
+      .subscribe(balance => {
+        this.balance = balance;
         this.notificationService.notify('The values for the previous month have been used.');
       });
   }
