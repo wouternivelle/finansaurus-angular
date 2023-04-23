@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.titleService.setTitle('Rhinance - Login');
+    this.titleService.setTitle('Finansaurus - Login');
   }
 
   onSubmit() {
