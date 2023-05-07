@@ -58,6 +58,12 @@ export class TransactionListComponent implements OnInit {
       this.selectedAccountId = accountId;
     }
 
+    // If there's a pagination stored in the session, use it
+    const transactionPagination = sessionStorage.getItem('transaction-pagination');
+    if (transactionPagination) {
+      this.pageSize = Number(transactionPagination);
+    }
+
     // Fetch the categories, payees, accounts and balances
     combineLatest([this.categoryService.list(), this.payeeService.list(), this.accountService.list(), this.transactionService.list(this.pageIndex, this.pageSize)])
       .subscribe(([categories, payees, accounts, transactionsPage]) => {
@@ -95,10 +101,13 @@ export class TransactionListComponent implements OnInit {
     this.pageSize = e.pageSize;
     this.pageIndex = e.pageIndex;
     this.loadTransactions();
+
+    // Store page size in session
+    sessionStorage.setItem('transaction-pagination', String(this.pageSize));
   }
 
   private loadTransactions() {
-    this.transactionService.list(this.paginator.pageIndex, this.paginator.pageSize)
+    this.transactionService.list(this.pageIndex, this.pageSize)
       .subscribe(transactionsPage => this.handleTransactionsPage(transactionsPage));
   }
 

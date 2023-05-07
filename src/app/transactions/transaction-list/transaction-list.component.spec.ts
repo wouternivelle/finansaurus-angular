@@ -5,6 +5,7 @@ import {Account, AccountType} from "../../accounts/model/account";
 import {Category, CategoryType} from "../../categories/model/category";
 import {Transaction, TransactionType} from "../model/transaction";
 import {TransactionsPage} from "../model/transactions.page";
+import {PageEvent} from "@angular/material/paginator";
 
 describe('TransactionListComponent', () => {
   let component: TransactionListComponent;
@@ -33,6 +34,33 @@ describe('TransactionListComponent', () => {
       'queryParams': {'accountId': '1'}
     }
   };
+
+  const localStorageMock = (() => {
+    let store = {};
+
+    return {
+      getItem(key: string | number) {
+        // @ts-ignore
+        return store[key] || null;
+      },
+      setItem(key: string | number, value: { toString: () => any; }) {
+        // @ts-ignore
+        store[key] = value.toString();
+      },
+      removeItem(key: string | number) {
+        // @ts-ignore
+        delete store[key];
+      },
+      clear() {
+        store = {};
+      }
+    };
+  })();
+
+  Object.defineProperty(window, 'sessionStorage', {
+    value: localStorageMock
+  });
+
   const payee = new Payee('payee 1', 1);
   const account = new Account('account 1', AccountType.CHECKINGS, 150, false, 1);
   const category = new Category('category 1', CategoryType.GENERAL, false, false, 1, null);
@@ -50,6 +78,8 @@ describe('TransactionListComponent', () => {
   });
 
   it('should init', async () => {
+    window.sessionStorage.setItem('transaction-pagination', '30');
+
     payeeService.list.mockReturnValueOnce(of([payee]));
     accountService.list.mockReturnValueOnce(of([account]));
     categoryService.list.mockReturnValueOnce(of([category]));
@@ -60,7 +90,7 @@ describe('TransactionListComponent', () => {
     expect(payeeService.list).toHaveBeenCalled();
     expect(accountService.list).toHaveBeenCalled();
     expect(categoryService.list).toHaveBeenCalled();
-    expect(transactionService.list).toHaveBeenCalled();
+    expect(transactionService.list).toHaveBeenCalledWith(0, 30);
 
     expect(component.transactions).toEqual([transaction]);
   });
@@ -98,5 +128,19 @@ describe('TransactionListComponent', () => {
     expect(matDialog.open).toHaveBeenCalled();
     expect(transactionService.delete).not.toHaveBeenCalled();
     expect(notificationService.notify).not.toHaveBeenCalled();
+  });
+
+  it('should handle page events', async () => {
+    transactionService.list.mockReturnValueOnce(of(new TransactionsPage([transaction], 2, 25, 0, 0)));
+
+    const pageEvent = new PageEvent();
+    pageEvent.pageSize = 25;
+    pageEvent.pageIndex = 2;
+    await component.onPage(pageEvent);
+
+    expect(transactionService.list).toHaveBeenCalledWith(2, 25);
+
+    expect(component.pageSize).toEqual(25);
+    expect(component.pageIndex).toEqual(2);
   });
 });
