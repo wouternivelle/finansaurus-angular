@@ -1,24 +1,10 @@
 <div class="container login-container flex-row items-center justify-center">
     <mat-card *ngIf="!loading">
       <mat-card-title>Finansaurus</mat-card-title>
-      <mat-card-subtitle>Log in to your account</mat-card-subtitle>
       <mat-card-content>
-        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-
-          <div class="form-group">
-            <mat-form-field>
-              <input placeholder="Password" type="password" required matInput class="form-control" formControlName="password">
-            </mat-form-field>
-          </div>
-
-          <div class="form-group button-row">
-            <button mat-raised-button color="primary" class="btn btn-success"
-                    type="submit"
-                    [disabled]="!loginForm.valid">
-              Login
-            </button>
-          </div>
-        </form>
+        <button mat-raised-button color="primary" class="btn btn-success" (click)="loginWithGoogle()">
+          Login with google
+        </button>
       </mat-card-content>
     </mat-card>
 

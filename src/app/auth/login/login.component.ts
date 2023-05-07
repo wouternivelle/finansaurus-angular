@@ -50,8 +50,8 @@ export class LoginComponent implements OnInit {
       });
   }
 
-  login() {
-    this.loading = true;
-    this.router.navigate(['/']);
+  loginWithGoogle() {
+    this.authenticationService.loginWithGoogle()
+      .then(() => this.router.navigate(['dashboard']));
   }
 }

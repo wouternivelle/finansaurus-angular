@@ -6,7 +6,7 @@ import {AuthGuard} from './guards/auth.guard';
 import {throwIfAlreadyLoaded} from './guards/module-import.guard';
 import {GlobalErrorHandler} from './services/globar-error.handler';
 import {NGXLogger} from "ngx-logger";
-import {BasicAuthInterceptor} from "./interceptor/basic.auth.interceptor";
+import {JwtAuthInterceptor} from "./interceptor/jwt.auth.interceptor";
 
 @NgModule({
   imports: [CommonModule, HttpClientModule],
@@ -17,7 +17,7 @@ import {BasicAuthInterceptor} from "./interceptor/basic.auth.interceptor";
     {provide: ErrorHandler, useClass: GlobalErrorHandler},
     {provide: NGXLogger, useClass: NGXLogger},
     {provide: 'LOCALSTORAGE', useValue: window.localStorage},
-    {provide: HTTP_INTERCEPTORS, useClass: BasicAuthInterceptor, multi: true},
+    {provide: HTTP_INTERCEPTORS, useClass: JwtAuthInterceptor, multi: true},
   ],
   exports: [],
 })
