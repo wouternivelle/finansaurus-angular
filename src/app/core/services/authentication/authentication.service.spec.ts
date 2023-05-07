@@ -1,6 +1,4 @@
 import {AuthenticationService} from "./authentication.service";
-import {of} from "rxjs";
-import {environment} from "../../../../environments/environment";
 
 const localStorageMock = (() => {
   let store = {};
@@ -31,17 +29,26 @@ Object.defineProperty(window, 'sessionStorage', {
 describe('AuthenticationService', () => {
   let service: AuthenticationService;
 
-  const httpClient: any = {
-    head: jest.fn()
+  const fireAuth: any = {
+    signInWithPopup: jest.fn()
+  };
+  const logger: any = {
+    log: jest.fn(),
+    error: jest.fn()
   };
   const router: any = {
     navigate: jest.fn()
   };
+  const user: any = {
+    user: {
+      getIdToken: jest.fn()
+    }
+  }
 
   beforeEach(() => {
     window.sessionStorage.setItem('auth', 'test');
 
-    service = new AuthenticationService(httpClient, router);
+    service = new AuthenticationService(router, fireAuth, logger);
   });
 
   it('should be created with logged in status', () => {
@@ -64,14 +71,16 @@ describe('AuthenticationService', () => {
     expect(router.navigate).toHaveBeenCalled();
   });
 
-  it('should login', done => {
+  it('should login with google', done => {
     service.loggedIn = false
 
-    httpClient.head.mockReturnValueOnce(of({}));
+    fireAuth.signInWithPopup.mockReturnValueOnce(Promise.resolve(user));
+    user.user.getIdToken.mockReturnValueOnce(Promise.resolve('token'));
 
-    service.login('pass').subscribe(() => {
+    service.loginWithGoogle().then(() => {
       expect(service.loggedIn).toEqual(true);
-      expect(httpClient.head).toHaveBeenCalledWith(environment.apiURL + 'login', expect.anything());
+      expect(fireAuth.signInWithPopup).toHaveBeenCalled();
+      expect(user.user.getIdToken).toHaveBeenCalled();
       done();
     });
   });
