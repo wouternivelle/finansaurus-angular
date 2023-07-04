@@ -13,7 +13,7 @@ export class AuthenticationService {
   loggedIn = false;
 
   constructor(private router: Router, private firebaseAuth: AngularFireAuth, private logger: NGXLogger) {
-    if (sessionStorage.getItem('auth')) {
+    if (localStorage.getItem('auth')) {
       this.loggedIn = true;
     }
   }
@@ -28,7 +28,7 @@ export class AuthenticationService {
       .then((user) => {
         return user.user!.getIdToken(true).then(token => {
           this.logger.log('You have been successfully logged in!');
-          sessionStorage.setItem('auth', token);
+          localStorage.setItem('auth', token);
           this.loggedIn = true;
         }).catch((error) => {
           this.logger.error(error);
@@ -44,7 +44,7 @@ export class AuthenticationService {
   }
 
   logout(): void {
-    sessionStorage.clear();
+    localStorage.clear();
     this.loggedIn = false;
     this.router.navigate(['/auth/login']);
   }

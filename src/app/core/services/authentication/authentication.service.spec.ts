@@ -22,7 +22,7 @@ const localStorageMock = (() => {
   };
 })();
 
-Object.defineProperty(window, 'sessionStorage', {
+Object.defineProperty(window, 'localStorage', {
   value: localStorageMock
 });
 
@@ -46,7 +46,7 @@ describe('AuthenticationService', () => {
   }
 
   beforeEach(() => {
-    window.sessionStorage.setItem('auth', 'test');
+    window.localStorage.setItem('auth', 'test');
 
     service = new AuthenticationService(router, fireAuth, logger);
   });

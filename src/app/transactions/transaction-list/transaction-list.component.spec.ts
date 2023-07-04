@@ -35,7 +35,7 @@ describe('TransactionListComponent', () => {
     }
   };
 
-  const localStorageMock = (() => {
+  const sessionStorageMock = (() => {
     let store = {};
 
     return {
@@ -58,7 +58,7 @@ describe('TransactionListComponent', () => {
   })();
 
   Object.defineProperty(window, 'sessionStorage', {
-    value: localStorageMock
+    value: sessionStorageMock
   });
 
   const payee = new Payee('payee 1', 1);
