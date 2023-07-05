@@ -9,7 +9,18 @@
           Add transaction
         </button>
 
-        <br>
+        <div>
+          <mat-paginator #paginator
+                         class="demo-paginator"
+                         (page)="onPage($event)"
+                         [pageSize]="pageSize"
+                         [pageIndex]="pageIndex"
+                         [length]="pageLength"
+                         [pageSizeOptions]="pageSizeOptions"
+                         [showFirstLastButtons]="true"
+                         aria-label="Select page">
+          </mat-paginator>
+        </div>
 
         <mat-table [dataSource]="datasource" matSort>
           <!-- Name Column -->
