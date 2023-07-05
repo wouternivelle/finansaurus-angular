@@ -30,7 +30,9 @@ export class AuthenticationService {
     user.getIdToken(true).then(token => {
       localStorage.setItem('auth', token);
       this.loggedIn = true;
-      this.router.navigate(['dashboard']);
+      if (this.router.url.includes('login')) {
+        this.router.navigate(['dashboard']);
+      }
     }).catch((error) => {
       this.logger.error(error);
     });
