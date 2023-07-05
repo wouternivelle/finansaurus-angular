@@ -32,6 +32,8 @@ export class TransactionListComponent implements OnInit {
   categoryMap: Map<number, string> = new Map<number, string>();
   payeeMap: Map<number, string> = new Map<number, string>();
 
+  loading: boolean = false;
+
   pageLength = 0;
   pageIndex = 0;
   pageSize = 15;
@@ -52,6 +54,7 @@ export class TransactionListComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.loading = true;
     // Verify if there's already an account given
     const accountId = Number(this.route.snapshot.queryParams['accountId']);
     if (accountId) {
@@ -79,6 +82,8 @@ export class TransactionListComponent implements OnInit {
         this.payeeMap = new Map<number, string>(
           this.payees.map((a) => [a.id, a.name] as [number, string])
         );
+
+        this.loading = false;
       });
   }
 
@@ -107,8 +112,12 @@ export class TransactionListComponent implements OnInit {
   }
 
   private loadTransactions() {
+    this.loading = true;
     this.transactionService.list(this.pageIndex, this.pageSize)
-      .subscribe(transactionsPage => this.handleTransactionsPage(transactionsPage));
+      .subscribe(transactionsPage => {
+        this.handleTransactionsPage(transactionsPage)
+        this.loading = false;
+      });
   }
 
   private handleTransactionsPage(transactionsPage: TransactionsPage) {
