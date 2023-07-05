@@ -42,56 +42,54 @@
       class="sidenav"
     >
       <mat-nav-list>
-        <h3 mat-subheader>Home</h3>
-
-        <a mat-list-item [routerLink]="['/dashboard']" routerLinkActive="active">
-          <mat-icon mat-list-icon>
+        <mat-list-item [routerLink]="['/dashboard']" routerLinkActive="active">
+          <mat-icon matListItemIcon>
             dashboard
           </mat-icon>
-          <p mat-line>Dashboard</p>
-        </a>
+          <div matListItemTitle>Dashboard</div>
+        </mat-list-item>
 
-        <a mat-list-item [routerLink]="['/transactions']" routerLinkActive="active">
-          <mat-icon mat-list-icon>
+        <mat-list-item [routerLink]="['/transactions']" routerLinkActive="active">
+          <mat-icon matListItemIcon>
             money
           </mat-icon>
-          <p mat-line>Transactions</p>
-        </a>
+          <div matListItemTitle>Transactions</div>
+        </mat-list-item>
 
-        <a mat-list-item [routerLink]="['/balances']" routerLinkActive="active">
-          <mat-icon mat-list-icon>
+        <mat-list-item [routerLink]="['/balances']" routerLinkActive="active">
+          <mat-icon matListItemIcon>
             account_balance
           </mat-icon>
-          <p mat-line>Balance</p>
-        </a>
+          <div matListItemTitle>Balance</div>
+        </mat-list-item>
 
-        <a mat-list-item [routerLink]="['/accounts']" routerLinkActive="active">
-          <mat-icon mat-list-icon>
+        <mat-list-item [routerLink]="['/accounts']" routerLinkActive="active">
+          <mat-icon matListItemIcon>
             account_balance_wallet
           </mat-icon>
-          <p mat-line>Accounts</p>
-        </a>
+          <div matListItemTitle>Accounts</div>
+        </mat-list-item>
 
-        <a mat-list-item [routerLink]="['/categories']" routerLinkActive="active">
-          <mat-icon mat-list-icon>
+        <mat-list-item [routerLink]="['/categories']" routerLinkActive="active">
+          <mat-icon matListItemIcon>
             featured_play_list
           </mat-icon>
-          <p mat-line>Categories</p>
-        </a>
+          <div matListItemTitle>Categories</div>
+        </mat-list-item>
 
-        <a mat-list-item [routerLink]="['/payees']" routerLinkActive="active">
-          <mat-icon mat-list-icon>
+        <mat-list-item [routerLink]="['/payees']" routerLinkActive="active">
+          <mat-icon matListItemIcon>
             people
           </mat-icon>
-          <p mat-line>Payees</p>
-        </a>
+          <div matListItemTitle>Payees</div>
+        </mat-list-item>
 
-        <a id="push-bottom" mat-list-item [routerLink]="['/about']" routerLinkActive="active">
-          <mat-icon mat-list-icon>
+        <mat-list-item id="push-bottom" [routerLink]="['/about']" routerLinkActive="active">
+          <mat-icon matListItemIcon>
             info_outline
           </mat-icon>
-          <p mat-line>About</p>
-        </a>
+          <div matListItemTitle>About</div>
+        </mat-list-item>
       </mat-nav-list>
     </mat-sidenav>
 

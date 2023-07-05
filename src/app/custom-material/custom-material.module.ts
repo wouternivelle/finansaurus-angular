@@ -15,7 +15,6 @@ import {MatLegacyDialogModule as MatDialogModule} from '@angular/material/legacy
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatIconModule} from '@angular/material/icon';
 import {MatLegacyInputModule as MatInputModule} from '@angular/material/legacy-input';
-import {MatLegacyListModule as MatListModule} from '@angular/material/legacy-list';
 import {MatLegacyMenuModule as MatMenuModule} from '@angular/material/legacy-menu';
 import {MatLegacyPaginatorModule as MatPaginatorModule} from '@angular/material/legacy-paginator';
 import {MatLegacyProgressBarModule as MatProgressBarModule} from '@angular/material/legacy-progress-bar';
@@ -29,6 +28,7 @@ import {MatLegacyTableModule as MatTableModule} from '@angular/material/legacy-t
 import {MatLegacyTabsModule as MatTabsModule} from '@angular/material/legacy-tabs';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatLegacyTooltipModule as MatTooltipModule} from '@angular/material/legacy-tooltip';
+import {MatListModule} from "@angular/material/list";
 
 export const MY_FORMATS = {
   parse: {
