@@ -1,8 +1,8 @@
 <div class="container flex-row items-center justify-center">
   <div class="flex-spacing">
-    <mat-card *ngIf="!loading">
-      <mat-card-title>Balance <span *ngIf="selectedBalance">{{selectedDate.getMonth() + 1}}/{{selectedDate.getFullYear()}}</span></mat-card-title>
-      <mat-card-actions>
+    <mat-card>
+      <mat-card-title *ngIf="!loading">Balance <span *ngIf="selectedBalance">{{selectedDate.getMonth() + 1}}/{{selectedDate.getFullYear()}}</span></mat-card-title>
+      <mat-card-actions *ngIf="!loading">
         <button mat-raised-button color="primary" (click)="onLoadPreviousMonth()">
           <mat-icon>navigate_before</mat-icon>
           Previous
