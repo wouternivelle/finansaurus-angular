@@ -30,7 +30,9 @@ describe('AuthenticationService', () => {
   let service: AuthenticationService;
 
   const fireAuth: any = {
-    signInWithPopup: jest.fn()
+    signInWithPopup: jest.fn(),
+    onAuthStateChanged: jest.fn(),
+    signOut: jest.fn()
   };
   const logger: any = {
     log: jest.fn(),
@@ -40,10 +42,11 @@ describe('AuthenticationService', () => {
     navigate: jest.fn()
   };
   const user: any = {
-    user: {
-      getIdToken: jest.fn()
-    }
-  }
+    getIdToken: jest.fn()
+  };
+  const userCredential: any = {
+    user: user
+  };
 
   beforeEach(() => {
     window.localStorage.setItem('auth', 'test');
@@ -74,13 +77,39 @@ describe('AuthenticationService', () => {
   it('should login with google', done => {
     service.loggedIn = false
 
-    fireAuth.signInWithPopup.mockReturnValueOnce(Promise.resolve(user));
-    user.user.getIdToken.mockReturnValueOnce(Promise.resolve('token'));
+    fireAuth.signInWithPopup.mockReturnValueOnce(Promise.resolve(userCredential));
+    userCredential.user.getIdToken.mockReturnValueOnce(Promise.resolve('token'));
 
     service.loginWithGoogle().then(() => {
       expect(service.loggedIn).toEqual(true);
       expect(fireAuth.signInWithPopup).toHaveBeenCalled();
-      expect(user.user.getIdToken).toHaveBeenCalled();
+      expect(userCredential.user.getIdToken).toHaveBeenCalled();
+      expect(router.navigate).toHaveBeenCalled();
+      done();
+    });
+  });
+
+  it('should log an error when logging in with google', done => {
+    service.loggedIn = false
+
+    fireAuth.signInWithPopup.mockReturnValueOnce(Promise.reject('error'));
+
+    service.loginWithGoogle().then(() => {
+      expect(service.loggedIn).toEqual(false);
+      expect(logger.error).toHaveBeenCalled();
+      done();
+    });
+  });
+
+  it('should log an error when getting a token', done => {
+    service.loggedIn = false
+
+    fireAuth.signInWithPopup.mockReturnValueOnce(Promise.resolve(userCredential));
+    userCredential.user.getIdToken.mockReturnValueOnce(Promise.reject());
+
+    service.loginWithGoogle().then(() => {
+      expect(service.loggedIn).toEqual(false);
+      expect(logger.error).toHaveBeenCalled();
       done();
     });
   });

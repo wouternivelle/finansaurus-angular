@@ -16,6 +16,24 @@ export class AuthenticationService {
     if (localStorage.getItem('auth')) {
       this.loggedIn = true;
     }
+
+    this.firebaseAuth.onAuthStateChanged(user => {
+      if (user) {
+        this.extractAndSaveToken(user!);
+      } else {
+        this.logout();
+      }
+    });
+  }
+
+  private extractAndSaveToken(user: firebase.User) {
+    user.getIdToken(true).then(token => {
+      localStorage.setItem('auth', token);
+      this.loggedIn = true;
+      this.router.navigate(['dashboard']);
+    }).catch((error) => {
+      this.logger.error(error);
+    });
   }
 
   loginWithGoogle(): Promise<void> {
@@ -26,13 +44,7 @@ export class AuthenticationService {
     return this.firebaseAuth
       .signInWithPopup(provider)
       .then((user) => {
-        return user.user!.getIdToken(true).then(token => {
-          this.logger.log('You have been successfully logged in!');
-          localStorage.setItem('auth', token);
-          this.loggedIn = true;
-        }).catch((error) => {
-          this.logger.error(error);
-        });
+        this.extractAndSaveToken(user.user!);
       })
       .catch((error) => {
         this.logger.error(error);
@@ -45,6 +57,7 @@ export class AuthenticationService {
 
   logout(): void {
     localStorage.clear();
+    this.firebaseAuth.signOut();
     this.loggedIn = false;
     this.router.navigate(['/auth/login']);
   }
