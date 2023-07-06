@@ -1,18 +1,33 @@
-<div *ngIf=balance>
-  <button mat-raised-button [matMenuTriggerFor]="actions">
-    Actions
-  </button>
-  <p><a class="link" (click)="loadIncomingTransactions()">{{balance.incoming | currency:'EUR'}} : Income</a></p>
-  <p>
-    {{balance.budgeted | currency:'EUR'}} Budgeted in {{date | date:'MMMM'}}
-  </p>
-  <p>
-    =
-    <span [className]="balance.incoming - balance.budgeted >= 0 ? 'positive' : 'negative'">
+<div *ngIf="balance" style="margin-top: 10px;">
+  <mat-grid-list cols="4" rowHeight="2:1">
+    <mat-grid-tile>
+      <div (click)="loadIncomingTransactions()">
+        <p class="header">Income</p>
+        <p class="text-center">{{balance.incoming | currency:'EUR'}}</p>
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <div>
+        <p class="header">Budgeted</p>
+        <p class="text-center">{{balance.budgeted | currency:'EUR'}}</p>
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <div>
+        <p class="header">Available</p>
+        <p class="text-center">
+          <span [className]="balance.incoming - balance.budgeted >= 0 ? 'positive' : 'negative'">
     {{balance.incoming - balance.budgeted | currency:'EUR'}}
     </span>
-    Available
-  </p>
+        </p>
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <button mat-flat-button [matMenuTriggerFor]="actions">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+    </mat-grid-tile>
+  </mat-grid-list>
 
   <form>
 
@@ -20,7 +35,8 @@
       <!-- Name Column -->
       <ng-container matColumnDef="name">
         <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
-        <mat-cell *matCellDef="let category" [ngClass]="category.parent != null ? 'child-category' : 'parent-category'">{{category.name}}</mat-cell>
+        <mat-cell *matCellDef="let category"
+                  [ngClass]="category.parent != null ? 'child-category' : 'parent-category'">{{category.name}}</mat-cell>
         <mat-footer-cell *matFooterCellDef class="parent-category">Total</mat-footer-cell>
       </ng-container>
 
@@ -30,12 +46,13 @@
 
         <mat-cell *matCellDef="let category">
           <mat-form-field *ngIf="category.parent != null">
-            <input placeholder="Amount" matInput type="number" class="form-control"
+            <input matInput type="number" class="form-control"
                    value="{{findCategory(balance, category.id).budgeted}}"
                    (focusout)="onBudgetCategoryEnter(category.id, $event, category.name)">
           </mat-form-field>
         </mat-cell>
-        <mat-footer-cell *matFooterCellDef class="parent-category">{{determineTotalBudgeted() | currency:'EUR'}}</mat-footer-cell>
+        <mat-footer-cell *matFooterCellDef
+                         class="parent-category">{{determineTotalBudgeted() | currency:'EUR'}}</mat-footer-cell>
       </ng-container>
 
       <!-- Outflow Column -->
@@ -43,10 +60,12 @@
         <mat-header-cell *matHeaderCellDef class="left-align">Outflow</mat-header-cell>
         <mat-cell *matCellDef="let category" class="left-align">
           <ng-container *ngIf="category.parent != null" (click)="loadTransactions(category.id)">
-            <a class="link" (click)="loadTransactions(category.id)">{{findCategory(balance, category.id).operations | currency:'EUR'}}</a>
+            <a class="link"
+               (click)="loadTransactions(category.id)">{{findCategory(balance, category.id).operations | currency:'EUR'}}</a>
           </ng-container>
         </mat-cell>
-        <mat-footer-cell *matFooterCellDef class="left-align parent-category">{{determineTotalOperations() | currency:'EUR'}}</mat-footer-cell>
+        <mat-footer-cell *matFooterCellDef
+                         class="left-align parent-category">{{determineTotalOperations() | currency:'EUR'}}</mat-footer-cell>
       </ng-container>
 
       <!-- Balance Column -->
@@ -61,7 +80,8 @@
             {{determineBalanceForCategory(category.id) | currency:'EUR'}}
           </ng-container>
         </mat-cell>
-        <mat-footer-cell *matFooterCellDef class="left-align parent-category">{{determineTotalBalance() | currency:'EUR'}}</mat-footer-cell>
+        <mat-footer-cell *matFooterCellDef
+                         class="left-align parent-category">{{determineTotalBalance() | currency:'EUR'}}</mat-footer-cell>
       </ng-container>
 
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
@@ -70,8 +90,6 @@
     </mat-table>
   </form>
 </div>
-
-
 
 <mat-menu #actions="matMenu">
   <button mat-menu-item (click)="onUsePreviousValues()">

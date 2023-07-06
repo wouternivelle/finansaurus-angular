@@ -7,10 +7,6 @@
   font-weight: bold;
 }
 
-.child-category {
-  padding-left: 30px;
-}
-
 .link, .mat-cell .link {
   text-decoration: underline;
 }
@@ -21,4 +17,36 @@
 
 .negative {
   color: #aa8cde;
+}
+
+.header {
+  font-weight: bold;
+}
+
+@media (max-width: 715px) {
+  .header {
+    height: 0;
+  }
+
+  mat-form-field {
+    width: 50px;
+  }
+}
+
+.grid-header {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.grid-parent {
+  font-weight: bold;
+}
+
+mat-cell:first-of-type, mat-header-cell:first-of-type, mat-footer-cell:first-of-type {
+  padding-left: 0;
+}
+
+mat-cell:first-of-type, mat-header-cell:first-of-type, mat-footer-cell:first-of-type {
+  padding-right: 0;
 }

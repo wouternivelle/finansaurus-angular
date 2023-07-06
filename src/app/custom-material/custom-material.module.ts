@@ -29,6 +29,7 @@ import {MatLegacyTabsModule as MatTabsModule} from '@angular/material/legacy-tab
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatLegacyTooltipModule as MatTooltipModule} from '@angular/material/legacy-tooltip';
 import {MatListModule} from "@angular/material/list";
+import {MatGridListModule} from "@angular/material/grid-list";
 
 export const MY_FORMATS = {
   parse: {
@@ -53,7 +54,6 @@ export const MY_FORMATS = {
     MatListModule,
     MatCardModule,
     MatProgressBarModule,
-    MatInputModule,
     MatSnackBarModule,
     MatProgressSpinnerModule,
     MatDatepickerModule,
@@ -102,6 +102,7 @@ export const MY_FORMATS = {
     MatExpansionModule,
     DragDropModule,
     MatSortModule,
+    MatGridListModule
   ],
   providers: [
     {
