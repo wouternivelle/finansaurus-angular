@@ -7,7 +7,7 @@
   font-weight: bold;
 }
 
-.link, .mat-cell .link {
+.link, .mat-mdc-cell .link {
   text-decoration: underline;
 }
 

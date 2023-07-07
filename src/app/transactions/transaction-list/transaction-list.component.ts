@@ -1,11 +1,11 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {ConfirmDialogComponent} from '../../shared/confirm-dialog/confirm-dialog.component';
-import {MatLegacyDialog as MatDialog} from '@angular/material/legacy-dialog';
+import {MatDialog} from '@angular/material/dialog';
 import {PayeeService} from '../../core/services/payee/payee.service';
 import {Transaction} from '../model/transaction';
-import {MatLegacyTableDataSource as MatTableDataSource} from '@angular/material/legacy-table';
+import {MatTableDataSource} from '@angular/material/table';
 import {Category} from '../../categories/model/category';
-import {LegacyPageEvent as PageEvent, MatLegacyPaginator as MatPaginator} from '@angular/material/legacy-paginator';
+import {MatPaginator, PageEvent} from '@angular/material/paginator';
 import {Payee} from '../../payees/model/payee';
 import {MatSort} from '@angular/material/sort';
 import {TransactionService} from '../../core/services/transaction/transaction.service';

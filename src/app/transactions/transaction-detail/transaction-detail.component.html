@@ -1,8 +1,10 @@
 <div class="container flex-row items-center justify-center">
   <div class="flex-spacing">
-    <mat-card>
-      <mat-card-title *ngIf="edit">Edit transaction</mat-card-title>
-      <mat-card-title *ngIf="!edit">Add transaction</mat-card-title>
+    <mat-card appearance="outlined">
+      <mat-card-header>
+        <mat-card-title *ngIf="edit">Edit transaction</mat-card-title>
+        <mat-card-title *ngIf="!edit">Add transaction</mat-card-title>
+      </mat-card-header>
       <mat-card-content>
         <div class="container">
           <div class="text-center no-records animate">
@@ -11,13 +13,13 @@
               <div class="form-group">
                 <mat-form-field>
                   <input placeholder="Date" required matInput [matDatepicker]="picker"
-                         class="form-control" formControlName="date" (focus)="picker.open()">
+                         formControlName="date" (focus)="picker.open()">
                   <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                   <mat-datepicker touchUi="true" #picker></mat-datepicker>
                 </mat-form-field>
               </div>
 
-              <div class="form-group">
+              <div>
                 <mat-form-field>
                   <input required matInput [matAutocomplete]="payeeAutoComplete"
                          placeholder="Payee" formControlName="payee">
@@ -30,7 +32,7 @@
                 </mat-autocomplete>
               </div>
 
-              <div class="form-group">
+              <div>
                 <mat-form-field>
                   <input required matInput [matAutocomplete]="categoryAutoComplete"
                          placeholder="Category" formControlName="category">
@@ -43,7 +45,7 @@
                 </mat-autocomplete>
               </div>
 
-              <div class="form-group">
+              <div>
                 <mat-form-field>
                   <mat-select required placeholder="Account" formControlName="account">
                     <mat-option *ngFor="let account of accounts" [value]="account.id">
@@ -53,41 +55,44 @@
                 </mat-form-field>
               </div>
 
-              <div class="form-group">
+              <div>
                 <mat-form-field>
-                  <input type="number" placeholder="Amount" required matInput
-                         class="form-control" formControlName="amount">
+                  <input type="number" placeholder="Amount" required matInput formControlName="amount">
                 </mat-form-field>
               </div>
 
-              <div class="form-group button-row">
-                <button type="button" mat-button (click)="onChangeType(transactionType.OUT)"
-                        [ngClass]="isPositive() ? 'mat-stroked-button' : 'mat-raised-button negative'">
+              <div class="type-row">
+                <button *ngIf="isPositive()" mat-stroked-button (click)="onChangeType(transactionType.OUT)">
                   -
                 </button>
-                <button style="margin-left: 20px" type="button" mat-button (click)="onChangeType(transactionType.IN)"
-                        [ngClass]="isPositive() ? 'mat-raised-button positive' : 'mat-stroked-button'">
+                <button *ngIf="!isPositive()" mat-raised-button class="negative" (click)="onChangeType(transactionType.OUT)">
+                  -
+                </button>
+
+                <button *ngIf="isPositive()" class="plus_button positive" mat-raised-button (click)="onChangeType(transactionType.IN)">
+                  +
+                </button>
+                <button *ngIf="!isPositive()" class="plus_button" mat-stroked-button (click)="onChangeType(transactionType.IN)">
                   +
                 </button>
               </div>
 
-              <div class="form-group">
+              <div>
                 <mat-form-field>
-                  <input placeholder="Note" matInput class="form-control" formControlName="note">
+                  <input placeholder="Note" matInput formControlName="note">
                 </mat-form-field>
               </div>
 
-              <div class="form-group button-row">
-                <button mat-button class="btn" type="reset">
+              <div>
+                <button mat-flat-button type="reset">
                   Reset
                 </button>
-                <button style="margin-left: 20px" mat-raised-button color="primary" class="btn btn-success"
+                <button style="margin-left: 20px" mat-raised-button color="primary"
                         type="submit"
                         [disabled]="!transactionForm.valid">
                   {{edit ? 'Update' : 'Add'}}
                 </button>
-                <button style="margin-left: 20px" mat-raised-button color="accent" class="btn btn-success"
-                        type="button"
+                <button style="margin-left: 20px" mat-raised-button color="accent"
                         (click)="onSubmit(true)"
                         [disabled]="!transactionForm.valid">
                   Add another

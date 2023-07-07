@@ -7,7 +7,7 @@ import {NotificationService} from '../../core/services/notification.service';
 import {CategoryService} from '../../core/services/category/category.service';
 import {TransactionService} from '../../core/services/transaction/transaction.service';
 import * as TransformationHelper from '../../shared/helper/transformation.helper';
-import {MatLegacyDialog as MatDialog} from '@angular/material/legacy-dialog';
+import {MatDialog} from '@angular/material/dialog';
 import {BalanceTransactionDialogComponent} from '../balance-transaction-dialog/balance-transaction-dialog.component';
 
 @Component({

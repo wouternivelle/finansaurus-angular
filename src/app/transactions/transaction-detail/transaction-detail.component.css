@@ -12,8 +12,18 @@ mat-form-field {
   width: 50%;
 }
 
+.type-row {
+  margin-bottom: 15px;
+}
+
+.plus_button {
+  margin-left: 20px;
+}
+
 @media (max-width: 715px) {
   mat-form-field {
     width: 100%;
   }
+  .hide-mobile { display:none!important; }
+  .container { margin: 0;}
 }
