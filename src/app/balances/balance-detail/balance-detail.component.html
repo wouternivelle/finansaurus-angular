@@ -44,7 +44,7 @@
       <ng-container matColumnDef="budgeted">
         <mat-header-cell *matHeaderCellDef>Budgeted</mat-header-cell>
 
-        <mat-cell *matCellDef="let category">
+        <mat-cell *matCellDef="let category" [ngClass]="category.parent != null ? 'child-category' : 'parent-category'">
           <mat-form-field *ngIf="category.parent != null">
             <input matInput type="number" class="form-control"
                    value="{{findCategory(balance, category.id).budgeted}}"
@@ -58,7 +58,7 @@
       <!-- Outflow Column -->
       <ng-container matColumnDef="outflow">
         <mat-header-cell *matHeaderCellDef class="left-align">Outflow</mat-header-cell>
-        <mat-cell *matCellDef="let category" class="left-align">
+        <mat-cell *matCellDef="let category" class="left-align" [ngClass]="category.parent != null ? 'child-category' : 'parent-category'">
           <ng-container *ngIf="category.parent != null" (click)="loadTransactions(category.id)">
             <a class="link"
                (click)="loadTransactions(category.id)">{{findCategory(balance, category.id).operations | currency:'EUR'}}</a>
@@ -73,8 +73,8 @@
         <mat-header-cell *matHeaderCellDef class="left-align">Balance</mat-header-cell>
         <mat-cell *matCellDef="let category" class="left-align"
                   [ngClass]="{
-                'positive': determineBalanceForCategory(category.id) >= 0,
-                'negative': determineBalanceForCategory(category.id) < 0
+                'positive': determineBalanceForCategory(category.id) >= 0 ? 'positive' : 'negative',
+                'parent-category': category.parent == null
                 }">
           <ng-container *ngIf="category.parent != null">
             {{determineBalanceForCategory(category.id) | currency:'EUR'}}

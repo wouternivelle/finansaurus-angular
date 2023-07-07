@@ -3,10 +3,6 @@
   justify-content: flex-end;
 }
 
-.parent-category {
-  font-weight: bold;
-}
-
 .link, .mat-mdc-cell .link {
   text-decoration: underline;
 }
@@ -31,6 +27,19 @@
   mat-form-field {
     width: 50px;
   }
+  mat-cell:first-of-type, mat-header-cell:first-of-type, mat-footer-cell:first-of-type {
+    padding-right: 0;
+  }
+}
+.mdc-data-table__cell, .mdc-data-table__header-cell {
+  border: none;
+}
+
+.parent-category {
+  font-weight: bold;
+  border-bottom: 1px solid;
+  border-bottom-color: rgba(255, 255, 255, 0.12);
+  margin-bottom: 5px;
 }
 
 .grid-header {
@@ -41,12 +50,4 @@
 
 .grid-parent {
   font-weight: bold;
-}
-
-mat-cell:first-of-type, mat-header-cell:first-of-type, mat-footer-cell:first-of-type {
-  padding-left: 0;
-}
-
-mat-cell:first-of-type, mat-header-cell:first-of-type, mat-footer-cell:first-of-type {
-  padding-right: 0;
 }

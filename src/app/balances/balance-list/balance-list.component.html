@@ -1,23 +1,26 @@
 <div class="container flex-row items-center justify-center">
   <div class="flex-spacing">
-<mat-card appearance="outlined">
-  <div *ngIf="!loading && selectedBalance" class="items-center flex-row justify-center">
-    <button mat-raised-button color="primary" (click)="onLoadPreviousMonth()">
-      <mat-icon>navigate_before</mat-icon>
-      <span class="hide-mobile">Previous</span>
-    </button>
-    <span style="padding-left: 10px; padding-right: 10px">
+    <mat-card appearance="outlined">
+      <mat-card-header class="hide-mobile">
+        <mat-card-title>Balance</mat-card-title>
+      </mat-card-header>
+      <div *ngIf="!loading && selectedBalance" class="items-center flex-row justify-center balance-selection">
+        <button mat-raised-button color="primary" (click)="onLoadPreviousMonth()">
+          <mat-icon>navigate_before</mat-icon>
+          <span class="hide-mobile">Previous</span>
+        </button>
+        <span style="padding-left: 10px; padding-right: 10px">
         {{selectedDate.getMonth() + 1}}
-      / {{selectedDate.getFullYear()}}</span>
-    <button mat-raised-button color="primary" (click)="onLoadNextMonth()">
-      <span class="hide-mobile">Next</span>
-      <mat-icon>navigate_next</mat-icon>
-    </button>
-  </div>
+          / {{selectedDate.getFullYear()}}</span>
+        <button mat-raised-button color="primary" (click)="onLoadNextMonth()">
+          <span class="hide-mobile">Next</span>
+          <mat-icon>navigate_next</mat-icon>
+        </button>
+      </div>
 
-  <app-balances-detail [balanceLoaded]="balanceLoaded.asObservable()"></app-balances-detail>
-</mat-card>
+      <app-balances-detail [balanceLoaded]="balanceLoaded.asObservable()"></app-balances-detail>
+    </mat-card>
 
-<mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+    <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
   </div>
 </div>
