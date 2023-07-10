@@ -18,6 +18,7 @@ import {BalanceTransactionDialogComponent} from '../balance-transaction-dialog/b
 export class BalanceDetailComponent implements OnInit {
   balance: Balance | undefined;
   categories: Category[] = [];
+  incomingNextMonth = 0;
 
   @Input() balanceLoaded!: Observable<Balance>;
 
@@ -50,8 +51,15 @@ export class BalanceDetailComponent implements OnInit {
         );
 
         this.date = new Date(this.balance.year, this.balance.month);
-      });
 
+        let nextMonth = new Date(this.balance.year, this.balance.month);
+        nextMonth.setMonth(this.date.getMonth() + 1);
+        this.transactionService.listIncomingTransactionsForBalance(nextMonth.getMonth(), nextMonth.getFullYear()).subscribe(transactions => {
+          transactions.forEach(transaction => {
+            this.incomingNextMonth += transaction.amount;
+          });
+        });
+      });
   }
 
   onBudgetCategoryEnter(categoryId: number, event: Event, categoryName: string) {

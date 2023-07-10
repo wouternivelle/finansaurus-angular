@@ -1,5 +1,4 @@
 import {of} from 'rxjs';
-import * as moment from 'moment';
 import {Balance, BalanceCategory} from '../model/balance';
 import {BalanceDetailComponent} from './balance-detail.component';
 import {Category, CategoryType} from '../../categories/model/category';
@@ -28,7 +27,7 @@ describe('BalanceDetailComponent', () => {
     open: jest.fn()
   };
 
-  const balance = new Balance(new Date().getMonth(), new Date().getFullYear(), 0, 100, []);
+  const balance = new Balance(10, 2023, 0, 100, []);
   const parent = new Category('parent', CategoryType.GENERAL, false, false, 1, null);
   const child = new Category('child', CategoryType.GENERAL, false, false, 2, 1);
 
@@ -50,6 +49,9 @@ describe('BalanceDetailComponent', () => {
     const child = new Category('child', CategoryType.GENERAL, false, false, 2, 1);
     categoryService.listWithoutSystem.mockReturnValueOnce(of([child, parent]));
 
+    const incomingTransaction = new Transaction(30.25, TransactionType.IN, new Date(), 'payee 1', 1, 1, 1, 'test');
+    transactionService.listIncomingTransactionsForBalance.mockReturnValueOnce(of([incomingTransaction]));
+
     component.balanceLoaded = of(balance);
 
     component.ngOnInit();
@@ -57,9 +59,11 @@ describe('BalanceDetailComponent', () => {
     expect(component).toBeTruthy();
     expect(component.balance).toEqual(balance);
     expect(component.budgeted).toEqual(100);
-    expect(component.date.getFullYear()).toEqual(moment().year());
-    expect(component.date.getMonth()).toEqual(moment().month());
+    expect(component.date.getFullYear()).toEqual(balance.year);
+    expect(component.date.getMonth()).toEqual(balance.month);
     expect(component.generalCategories).toEqual([parent, child]);
+    expect(transactionService.listIncomingTransactionsForBalance).toHaveBeenCalledWith(11, 2023);
+    expect(component.incomingNextMonth).toEqual(30.25);
   });
 
   it('should enter a budget for a category', async () => {
@@ -86,6 +90,11 @@ describe('BalanceDetailComponent', () => {
 
     expect(result).toBe(40);
   });
+  it('should return 0 when determining the balance for a category', () => {
+    const result = component.determineBalanceForCategory(1);
+
+    expect(result).toBe(0);
+  });
 
   it('should replace the budgeted values of the current balance with the previous balance', async () => {
     component.balance = balance;
@@ -103,9 +112,15 @@ describe('BalanceDetailComponent', () => {
     const balanceCategory3 = new BalanceCategory(3, 150, 30, 120);
     component.balance.categories = [balanceCategory, balanceCategory2, balanceCategory3];
 
-    const result: number = component.determineTotalBudgeted();
+    const result = component.determineTotalBudgeted();
 
     expect(result).toBe(300);
+  });
+
+  it('should return 0 when determining the total budgeted amount', () => {
+    const result = component.determineTotalBudgeted();
+
+    expect(result).toBe(0);
   });
 
   it('should determine the total operations amount for a balance', () => {
@@ -120,6 +135,12 @@ describe('BalanceDetailComponent', () => {
     expect(result).toBe(60);
   });
 
+  it('should return 0 when determining the total operations for a balance', () => {
+    const result = component.determineTotalOperations();
+
+    expect(result).toBe(0);
+  });
+
   it('should determine the total balance amount for a balance', () => {
     component.balance = balance;
     const balanceCategory = new BalanceCategory(1, 50, 10, 40);
@@ -130,6 +151,12 @@ describe('BalanceDetailComponent', () => {
     const result = component.determineTotalBalance();
 
     expect(result).toBe(240);
+  });
+
+  it('should return 0 when determining the total balance amount for a balance', () => {
+    const result = component.determineTotalBalance();
+
+    expect(result).toBe(0);
   });
 
   it('should load the incoming transactions and show the dialog', async () => {

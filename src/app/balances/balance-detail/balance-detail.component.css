@@ -1,8 +1,3 @@
-.left-align {
-  display: flex;
-  justify-content: flex-end;
-}
-
 .link, .mat-mdc-cell .link {
   text-decoration: underline;
 }
@@ -37,9 +32,11 @@
 
 .parent-category {
   font-weight: bold;
+}
+
+.parent-row {
   border-bottom: 1px solid;
   border-bottom-color: rgba(255, 255, 255, 0.12);
-  margin-bottom: 5px;
 }
 
 .grid-header {
@@ -50,4 +47,12 @@
 
 .grid-parent {
   font-weight: bold;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+mat-form-field {
+  padding-top: 5px;
 }
