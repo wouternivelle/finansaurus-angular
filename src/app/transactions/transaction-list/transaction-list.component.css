@@ -3,67 +3,8 @@
     display: none !important;
   }
 
-  .mat-mdc-table {
-    border: 0;
-    vertical-align: middle
-  }
-
-  .mat-mdc-table caption {
-    font-size: 1em;
-  }
-
-  .mat-mdc-table .mat-mdc-header-cell {
-    border: 10px solid;
-    clip: rect(0 0 0 0);
-    height: 1px;
-    margin: -1px;
-    padding: 0;
-    position: absolute;
-    width: 1px;
-  }
-
-  .mat-mdc-table .mat-mdc-row {
-    border-bottom: 3px solid #ddd;
+  .flex-row {
     display: block;
-  }
-
-  .mat-mdc-table .mat-mdc-cell {
-    border-bottom: 1px solid #ddd;
-    display: block;
-    font-size: 1em;
-    text-align: right;
-    font-weight: bold;
-    height: 30px;
-    margin-bottom: 4%;
-  }
-
-  .mat-mdc-table .mat-mdc-cell:before {
-    content: attr(data-label);
-    float: left;
-    text-transform: uppercase;
-    font-weight: normal;
-    color: #ffffff;
-    font-size: .85em;
-  }
-
-  .mat-mdc-table .mat-mdc-cell:last-child {
-    border-bottom: 0;
-  }
-
-  .mat-mdc-table .mat-mdc-cell:first-child {
-    margin-top: 4%;
-  }
-
-  mat-cell:last-of-type {
-    padding-right: 0px;
-  }
-
-  mat-cell:first-of-type {
-    padding-left: 0px;
-  }
-
-  mat-row {
-    min-height: 20px;
   }
 }
 
@@ -73,4 +14,12 @@
 
 .negative {
   color: #aa8cde;
+}
+
+table {
+  white-space: nowrap;
+}
+
+.table-container {
+  overflow: auto;
 }
