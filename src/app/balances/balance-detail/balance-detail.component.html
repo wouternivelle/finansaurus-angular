@@ -99,7 +99,7 @@
       <ng-container matColumnDef="total">
         <td mat-footer-cell *matFooterCellDef
             [ngClass]="determineTotalBalance() - incomingNextMonth >= 0 ? 'positive' : 'negative'">
-          = {{determineTotalBalance() - incomingNextMonth | currency: 'EUR'}}
+          = {{determineTotalBalance() + incomingNextMonth | currency: 'EUR'}}
         </td>
       </ng-container>
 
