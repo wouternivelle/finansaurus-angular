@@ -93,6 +93,7 @@
                   {{edit ? 'Update' : 'Add'}}
                 </button>
                 <button style="margin-left: 20px" mat-raised-button color="accent"
+                        type="button"
                         (click)="onSubmit(true)"
                         [disabled]="!transactionForm.valid">
                   Add another
