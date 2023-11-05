@@ -8,15 +8,16 @@ import {CoreModule} from "./core/core.module";
 import {LoggerModule, NgxLoggerLevel} from "ngx-logger";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {ServiceWorkerModule} from "@angular/service-worker";
-import {AngularFireModule} from "@angular/fire/compat";
 import {environment} from "../environments/environment";
+import {getApp, initializeApp, provideFirebaseApp} from "@angular/fire/app";
+import {initializeAuth, provideAuth} from "@angular/fire/auth";
+import {FIREBASE_OPTIONS} from "@angular/fire/compat";
 
 @NgModule({
   declarations: [
     AppComponent
   ],
   imports: [
-    AngularFireModule.initializeApp(environment.firebase),
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
@@ -33,8 +34,13 @@ import {environment} from "../environments/environment";
       // or after 30 seconds (whichever comes first).
       registrationStrategy: 'registerWhenStable:30000'
     }),
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideAuth(() => initializeAuth(getApp())),
   ],
-  providers: [],
+  providers: [
+    {provide: FIREBASE_OPTIONS, useValue: environment.firebase}
+  ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

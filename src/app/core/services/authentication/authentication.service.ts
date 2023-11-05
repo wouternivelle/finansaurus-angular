@@ -5,8 +5,7 @@ import 'firebase/compat/auth';
 
 import {NGXLogger} from "ngx-logger";
 import {AngularFireAuth} from "@angular/fire/compat/auth";
-import AuthProvider = firebase.auth.AuthProvider;
-import GoogleAuthProvider = firebase.auth.GoogleAuthProvider;
+import {AuthProvider, GoogleAuthProvider} from '@angular/fire/auth';
 
 @Injectable({providedIn: 'root'})
 export class AuthenticationService {
