@@ -11,7 +11,6 @@ import {BalanceTransactionDialogComponent} from './balance-transaction-dialog/ba
 @NgModule({
   imports: [CommonModule, BalancesRoutingModule, SharedModule],
   declarations: [BalanceListComponent, BalanceDetailComponent, BalanceTransactionDialogComponent],
-  entryComponents: [],
 })
 export class BalancesModule {
 }

@@ -10,7 +10,6 @@ import {TransactionDetailComponent} from './transaction-detail/transaction-detai
 @NgModule({
   imports: [CommonModule, TransactionsRoutingModule, SharedModule],
   declarations: [TransactionListComponent, TransactionDetailComponent],
-  entryComponents: [],
 })
 export class TransactionsModule {
 }

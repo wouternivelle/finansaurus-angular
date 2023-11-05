@@ -10,7 +10,6 @@ import {CategoryListComponent} from './category-list/category-list.component';
 @NgModule({
   imports: [CommonModule, CategoriesRoutingModule, SharedModule],
   declarations: [CategoryDetailComponent, CategoryListComponent],
-  entryComponents: [],
 })
 export class CategoriesModule {
 }
