@@ -33,7 +33,6 @@ import {YesNoPipe} from './pipes/yes-no.pipe';
     LocalDatePipe,
     YesNoPipe,
   ],
-  entryComponents: [ConfirmDialogComponent],
 })
 export class SharedModule {
 }
