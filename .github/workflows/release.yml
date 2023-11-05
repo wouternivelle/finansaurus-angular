@@ -53,18 +53,6 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build -t ghcr.io/wouternivelle/finansaurus-web:${{github.ref_name}} .
-
-      - name: List Docker images
-        run: |
-          docker images
-
-      - name: Push Docker image
-        run: |
-          docker push ghcr.io/wouternivelle/finansaurus-web:${{github.ref_name}}
-
-      - name: Build Docker image
-        run: |
           docker build -t wouternivelle/finansaurus-web:${{github.ref_name}} .
 
       - name: Log in to the Docker Container registry
