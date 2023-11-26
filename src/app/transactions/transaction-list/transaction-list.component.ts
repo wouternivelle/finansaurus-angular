@@ -39,7 +39,7 @@ export class TransactionListComponent implements OnInit {
   pageSize = 15;
   pageSizeOptions = [15, 30, 50];
 
-  displayedColumns = ['date', 'amount', 'category', 'payee', 'note', 'actions'];
+  displayedColumns = ['date', 'amount', 'payee', 'category', 'note', 'actions'];
 
   @ViewChild(MatPaginator, {static: true}) paginator!: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort!: MatSort;
