@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {CategoryService} from '../../core/services/category/category.service';
@@ -50,6 +50,8 @@ export class TransactionDetailComponent implements OnInit {
   filteredCategories: Category[] = [];
 
   edit = false;
+
+  @ViewChild('payeeInputRef') payeeInput: ElementRef | undefined;
 
   // Controls
   transactionForm = new FormGroup({
@@ -152,6 +154,7 @@ export class TransactionDetailComponent implements OnInit {
         this.notificationService.notify('Transaction for ' + transaction.payeeName + ' saved');
         if (addAnother) {
           this.resetForm(transaction);
+          this.payeeInput!.nativeElement.focus();
         } else {
           this.router.navigate(['transactions']);
         }
