@@ -1,5 +1,5 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import { FormControl, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {CategoryService} from '../../core/services/category/category.service';
 import {NotificationService} from '../../core/services/notification.service';
@@ -11,11 +11,19 @@ import {AccountService} from '../../core/services/account/account.service';
 import {PayeeService} from '../../core/services/payee/payee.service';
 import {TransactionService} from '../../core/services/transaction/transaction.service';
 import {Transaction, TransactionType} from '../model/transaction';
-import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE, MatOption } from '@angular/material/core';
 import {MomentDateAdapter} from '@angular/material-moment-adapter';
 import {categoryKnownValidator} from './validator/category-known-validator';
 import * as moment from 'moment';
 import {Balance} from '../../balances/model/balance';
+import { MatButton } from '@angular/material/button';
+import { MatSelect } from '@angular/material/select';
+import { MatAutocompleteTrigger, MatAutocomplete } from '@angular/material/autocomplete';
+import { MatDatepickerInput, MatDatepickerToggle, MatDatepicker } from '@angular/material/datepicker';
+import { MatInput } from '@angular/material/input';
+import { MatFormField, MatSuffix } from '@angular/material/form-field';
+import { NgIf, NgFor } from '@angular/common';
+import { MatCard, MatCardHeader, MatCardTitle, MatCardContent } from '@angular/material/card';
 
 export const DATE_FORMATS = {
   parse: {
@@ -30,13 +38,15 @@ export const DATE_FORMATS = {
 };
 
 @Component({
-  selector: 'app-transaction-detail',
-  templateUrl: './transaction-detail.component.html',
-  styleUrls: ['./transaction-detail.component.css'],
-  providers: [
-    {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},
-    {provide: MAT_DATE_FORMATS, useValue: DATE_FORMATS},
-  ]
+    selector: 'app-transaction-detail',
+    templateUrl: './transaction-detail.component.html',
+    styleUrls: ['./transaction-detail.component.css'],
+    providers: [
+        { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
+        { provide: MAT_DATE_FORMATS, useValue: DATE_FORMATS },
+    ],
+    standalone: true,
+    imports: [MatCard, MatCardHeader, NgIf, MatCardTitle, MatCardContent, ReactiveFormsModule, MatFormField, MatInput, MatDatepickerInput, MatDatepickerToggle, MatSuffix, MatDatepicker, MatAutocompleteTrigger, MatAutocomplete, NgFor, MatOption, MatSelect, MatButton]
 })
 export class TransactionDetailComponent implements OnInit {
   categories: Category[] = [];

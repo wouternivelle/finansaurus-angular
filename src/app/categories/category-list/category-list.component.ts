@@ -5,11 +5,20 @@ import {Category} from '../model/category';
 import {CategoryService} from '../../core/services/category/category.service';
 import {NotificationService} from '../../core/services/notification.service';
 import * as TransformationHelper from '../../shared/helper/transformation.helper';
+import { MatMenuTrigger, MatMenu, MatMenuContent, MatMenuItem } from '@angular/material/menu';
+import { MatIcon } from '@angular/material/icon';
+import { RouterLink } from '@angular/router';
+import { MatIconButton, MatButton } from '@angular/material/button';
+import { NgClass } from '@angular/common';
+import { MatTable, MatColumnDef, MatHeaderCellDef, MatHeaderCell, MatCellDef, MatCell, MatHeaderRowDef, MatHeaderRow, MatRowDef, MatRow } from '@angular/material/table';
+import { MatCard, MatCardHeader, MatCardTitle, MatCardContent } from '@angular/material/card';
 
 @Component({
-  selector: 'app-category-list',
-  templateUrl: './category-list.component.html',
-  styleUrls: ['./category-list.component.css']
+    selector: 'app-category-list',
+    templateUrl: './category-list.component.html',
+    styleUrls: ['./category-list.component.css'],
+    standalone: true,
+    imports: [MatCard, MatCardHeader, MatCardTitle, MatCardContent, MatTable, MatColumnDef, MatHeaderCellDef, MatHeaderCell, MatCellDef, MatCell, NgClass, MatIconButton, RouterLink, MatIcon, MatMenuTrigger, MatHeaderRowDef, MatHeaderRow, MatRowDef, MatRow, MatButton, MatMenu, MatMenuContent, MatMenuItem]
 })
 export class CategoryListComponent implements OnInit {
 

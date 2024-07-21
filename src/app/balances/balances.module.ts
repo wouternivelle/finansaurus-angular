@@ -9,8 +9,7 @@ import {BalanceDetailComponent} from './balance-detail/balance-detail.component'
 import {BalanceTransactionDialogComponent} from './balance-transaction-dialog/balance-transaction-dialog.component';
 
 @NgModule({
-  imports: [CommonModule, BalancesRoutingModule, SharedModule],
-  declarations: [BalanceListComponent, BalanceDetailComponent, BalanceTransactionDialogComponent],
+    imports: [CommonModule, BalancesRoutingModule, SharedModule, BalanceListComponent, BalanceDetailComponent, BalanceTransactionDialogComponent],
 })
 export class BalancesModule {
 }

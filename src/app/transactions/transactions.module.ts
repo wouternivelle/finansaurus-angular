@@ -8,8 +8,7 @@ import {TransactionListComponent} from './transaction-list/transaction-list.comp
 import {TransactionDetailComponent} from './transaction-detail/transaction-detail.component';
 
 @NgModule({
-  imports: [CommonModule, TransactionsRoutingModule, SharedModule],
-  declarations: [TransactionListComponent, TransactionDetailComponent],
+    imports: [CommonModule, TransactionsRoutingModule, SharedModule, TransactionListComponent, TransactionDetailComponent],
 })
 export class TransactionsModule {
 }

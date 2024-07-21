@@ -4,11 +4,19 @@ import {MatDialog} from '@angular/material/dialog';
 import {PayeeService} from '../../core/services/payee/payee.service';
 import {Payee} from '../model/payee';
 import {NotificationService} from '../../core/services/notification.service';
+import { MatMenuTrigger, MatMenu, MatMenuContent, MatMenuItem } from '@angular/material/menu';
+import { MatIcon } from '@angular/material/icon';
+import { RouterLink } from '@angular/router';
+import { MatIconButton, MatButton } from '@angular/material/button';
+import { MatTable, MatColumnDef, MatHeaderCellDef, MatHeaderCell, MatCellDef, MatCell, MatFooterCellDef, MatFooterCell, MatHeaderRowDef, MatHeaderRow, MatRowDef, MatRow } from '@angular/material/table';
+import { MatCard, MatCardHeader, MatCardTitle, MatCardContent } from '@angular/material/card';
 
 @Component({
-  selector: 'app-payee-list',
-  templateUrl: './payee-list.component.html',
-  styleUrls: ['./payee-list.component.css']
+    selector: 'app-payee-list',
+    templateUrl: './payee-list.component.html',
+    styleUrls: ['./payee-list.component.css'],
+    standalone: true,
+    imports: [MatCard, MatCardHeader, MatCardTitle, MatCardContent, MatTable, MatColumnDef, MatHeaderCellDef, MatHeaderCell, MatCellDef, MatCell, MatIconButton, RouterLink, MatIcon, MatMenuTrigger, MatFooterCellDef, MatFooterCell, MatHeaderRowDef, MatHeaderRow, MatRowDef, MatRow, MatButton, MatMenu, MatMenuContent, MatMenuItem]
 })
 export class PayeeListComponent implements OnInit {
   payees: Payee[] = [];

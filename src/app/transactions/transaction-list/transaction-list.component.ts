@@ -3,24 +3,32 @@ import {ConfirmDialogComponent} from '../../shared/confirm-dialog/confirm-dialog
 import {MatDialog} from '@angular/material/dialog';
 import {PayeeService} from '../../core/services/payee/payee.service';
 import {Transaction} from '../model/transaction';
-import {MatTableDataSource} from '@angular/material/table';
+import { MatTableDataSource, MatTable, MatColumnDef, MatHeaderCellDef, MatHeaderCell, MatCellDef, MatCell, MatHeaderRowDef, MatHeaderRow, MatRowDef, MatRow } from '@angular/material/table';
 import {Category} from '../../categories/model/category';
 import {MatPaginator, PageEvent} from '@angular/material/paginator';
 import {Payee} from '../../payees/model/payee';
-import {MatSort} from '@angular/material/sort';
+import { MatSort, MatSortHeader } from '@angular/material/sort';
 import {TransactionService} from '../../core/services/transaction/transaction.service';
-import {ActivatedRoute} from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import {CategoryService} from '../../core/services/category/category.service';
 import {AccountService} from '../../core/services/account/account.service';
 import {NotificationService} from '../../core/services/notification.service';
 import {combineLatest} from 'rxjs';
 import {Account} from '../../accounts/model/account';
 import {TransactionsPage} from "../model/transactions.page";
+import { MatProgressBar } from '@angular/material/progress-bar';
+import { MatMenuTrigger, MatMenu, MatMenuContent, MatMenuItem } from '@angular/material/menu';
+import { MatIcon } from '@angular/material/icon';
+import { MatButton, MatIconButton } from '@angular/material/button';
+import { MatCard, MatCardHeader, MatCardTitle, MatCardContent } from '@angular/material/card';
+import { NgIf, NgClass, CurrencyPipe, DatePipe } from '@angular/common';
 
 @Component({
-  selector: 'app-transaction-list',
-  templateUrl: './transaction-list.component.html',
-  styleUrls: ['./transaction-list.component.css']
+    selector: 'app-transaction-list',
+    templateUrl: './transaction-list.component.html',
+    styleUrls: ['./transaction-list.component.css'],
+    standalone: true,
+    imports: [NgIf, MatCard, MatCardHeader, MatCardTitle, MatCardContent, MatButton, RouterLink, MatIcon, MatPaginator, MatTable, MatSort, MatColumnDef, MatHeaderCellDef, MatHeaderCell, MatSortHeader, MatCellDef, MatCell, NgClass, MatIconButton, MatMenuTrigger, MatHeaderRowDef, MatHeaderRow, MatRowDef, MatRow, MatProgressBar, MatMenu, MatMenuContent, MatMenuItem, CurrencyPipe, DatePipe]
 })
 export class TransactionListComponent implements OnInit {
   transactions: Transaction[] = [];

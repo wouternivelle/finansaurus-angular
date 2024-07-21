@@ -8,8 +8,7 @@ import {PayeeListComponent} from './payee-list/payee-list.component';
 import {PayeeDetailComponent} from "./payee-detail/payee-detail.component";
 
 @NgModule({
-  imports: [CommonModule, PayeesRoutingModule, SharedModule],
-  declarations: [PayeeDetailComponent, PayeeListComponent],
+    imports: [CommonModule, PayeesRoutingModule, SharedModule, PayeeDetailComponent, PayeeListComponent],
 })
 export class PayeesModule {
 }

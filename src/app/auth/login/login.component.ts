@@ -4,11 +4,24 @@ import {Router} from '@angular/router';
 import {NotificationService} from '../../core/services/notification.service';
 import {AuthenticationService} from "../../core/services/authentication/authentication.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
+import { MatProgressBar } from '@angular/material/progress-bar';
+import { MatButton } from '@angular/material/button';
+import { MatCard, MatCardTitle, MatCardContent } from '@angular/material/card';
+import { NgIf } from '@angular/common';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss'],
+    selector: 'app-login',
+    templateUrl: './login.component.html',
+    styleUrls: ['./login.component.scss'],
+    standalone: true,
+    imports: [
+        NgIf,
+        MatCard,
+        MatCardTitle,
+        MatCardContent,
+        MatButton,
+        MatProgressBar,
+    ],
 })
 export class LoginComponent implements OnInit {
   loading: boolean = false;

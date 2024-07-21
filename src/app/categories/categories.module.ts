@@ -8,8 +8,7 @@ import {CategoriesRoutingModule} from './categories-routing.module';
 import {CategoryListComponent} from './category-list/category-list.component';
 
 @NgModule({
-  imports: [CommonModule, CategoriesRoutingModule, SharedModule],
-  declarations: [CategoryDetailComponent, CategoryListComponent],
+    imports: [CommonModule, CategoriesRoutingModule, SharedModule, CategoryDetailComponent, CategoryListComponent],
 })
 export class CategoriesModule {
 }

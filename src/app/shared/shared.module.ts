@@ -14,25 +14,22 @@ import {LocalDatePipe} from './pipes/local-date.pipe';
 import {YesNoPipe} from './pipes/yes-no.pipe';
 
 @NgModule({
-  imports: [RouterModule, CustomMaterialModule, ReactiveFormsModule],
-  declarations: [
-    ConfirmDialogComponent,
-    ContentPlaceholderAnimationComponent,
-    LimitToPipe,
-    LocalDatePipe,
-    YesNoPipe,
-    LayoutComponent,
-  ],
-  exports: [
-    FormsModule,
-    ReactiveFormsModule,
-    CustomMaterialModule,
-    LimitToPipe,
-    ConfirmDialogComponent,
-    ContentPlaceholderAnimationComponent,
-    LocalDatePipe,
-    YesNoPipe,
-  ],
+    imports: [RouterModule, CustomMaterialModule, ReactiveFormsModule, ConfirmDialogComponent,
+        ContentPlaceholderAnimationComponent,
+        LimitToPipe,
+        LocalDatePipe,
+        YesNoPipe,
+        LayoutComponent],
+    exports: [
+        FormsModule,
+        ReactiveFormsModule,
+        CustomMaterialModule,
+        LimitToPipe,
+        ConfirmDialogComponent,
+        ContentPlaceholderAnimationComponent,
+        LocalDatePipe,
+        YesNoPipe,
+    ],
 })
 export class SharedModule {
 }

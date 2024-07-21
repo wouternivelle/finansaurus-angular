@@ -9,11 +9,22 @@ import {TransactionService} from '../../core/services/transaction/transaction.se
 import * as TransformationHelper from '../../shared/helper/transformation.helper';
 import {MatDialog} from '@angular/material/dialog';
 import {BalanceTransactionDialogComponent} from '../balance-transaction-dialog/balance-transaction-dialog.component';
+import { MatInput } from '@angular/material/input';
+import { MatFormField } from '@angular/material/form-field';
+import { MatTable, MatColumnDef, MatHeaderCellDef, MatHeaderCell, MatCellDef, MatCell, MatFooterCellDef, MatFooterCell, MatHeaderRowDef, MatHeaderRow, MatRowDef, MatRow, MatFooterRowDef, MatFooterRow } from '@angular/material/table';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { MatIcon } from '@angular/material/icon';
+import { MatMenuTrigger, MatMenu, MatMenuItem } from '@angular/material/menu';
+import { MatButton } from '@angular/material/button';
+import { MatGridList, MatGridTile } from '@angular/material/grid-list';
+import { NgIf, NgClass, CurrencyPipe } from '@angular/common';
 
 @Component({
-  selector: 'app-balances-detail',
-  templateUrl: './balance-detail.component.html',
-  styleUrls: ['./balance-detail.component.css']
+    selector: 'app-balances-detail',
+    templateUrl: './balance-detail.component.html',
+    styleUrls: ['./balance-detail.component.css'],
+    standalone: true,
+    imports: [NgIf, MatGridList, MatGridTile, MatButton, MatMenuTrigger, MatIcon, ReactiveFormsModule, FormsModule, MatTable, MatColumnDef, MatHeaderCellDef, MatHeaderCell, MatCellDef, MatCell, NgClass, MatFooterCellDef, MatFooterCell, MatFormField, MatInput, MatHeaderRowDef, MatHeaderRow, MatRowDef, MatRow, MatFooterRowDef, MatFooterRow, MatMenu, MatMenuItem, CurrencyPipe]
 })
 export class BalanceDetailComponent implements OnInit {
   balance: Balance | undefined;
