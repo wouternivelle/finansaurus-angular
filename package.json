@@ -25,7 +25,7 @@
     "@angular/platform-browser-dynamic": "^17.3.12",
     "@angular/router": "^17.3.12",
     "@angular/service-worker": "^17.3.12",
-    "firebase": "^9.21.0",
+    "firebase": "^10.12.4",
     "moment": "^2.29.4",
     "ngx-logger": "^5.0.11",
     "rxjs": "~7.8.1",
