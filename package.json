@@ -17,7 +17,7 @@
     "@angular/common": "^17.3.12",
     "@angular/compiler": "^17.3.12",
     "@angular/core": "^17.3.12",
-    "@angular/fire": "^16.0.0",
+    "@angular/fire": "^17.1.0",
     "@angular/forms": "^17.3.12",
     "@angular/material": "^16.2.11",
     "@angular/material-moment-adapter": "^16.2.11",
@@ -28,7 +28,7 @@
     "firebase": "^9.21.0",
     "moment": "^2.29.4",
     "ngx-logger": "^5.0.11",
-    "rxjs": "~7.5.0",
+    "rxjs": "~7.8.1",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.8"
   },
