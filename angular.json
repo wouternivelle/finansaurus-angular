@@ -69,10 +69,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "finansaurus-web:build:production"
+              "buildTarget": "finansaurus-web:build:production"
             },
             "development": {
-              "browserTarget": "finansaurus-web:build:development"
+              "buildTarget": "finansaurus-web:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -80,7 +80,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "finansaurus-web:build"
+            "buildTarget": "finansaurus-web:build"
           }
         }
       }
