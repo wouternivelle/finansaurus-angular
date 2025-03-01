@@ -45,7 +45,6 @@ export const DATE_FORMATS = {
         { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
         { provide: MAT_DATE_FORMATS, useValue: DATE_FORMATS },
     ],
-    standalone: true,
     imports: [MatCard, MatCardHeader, NgIf, MatCardTitle, MatCardContent, ReactiveFormsModule, MatFormField, MatInput, MatDatepickerInput, MatDatepickerToggle, MatSuffix, MatDatepicker, MatAutocompleteTrigger, MatAutocomplete, NgFor, MatOption, MatSelect, MatButton]
 })
 export class TransactionDetailComponent implements OnInit {

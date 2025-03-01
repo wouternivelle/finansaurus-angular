@@ -6,12 +6,11 @@ import { MatButton } from '@angular/material/button';
     selector: 'app-confirm-dialog',
     templateUrl: './confirm-dialog.component.html',
     styleUrls: ['./confirm-dialog.component.scss'],
-    standalone: true,
     imports: [
         MatDialogContent,
         MatDialogActions,
         MatButton,
-    ],
+    ]
 })
 export class ConfirmDialogComponent implements OnInit {
   message: string;

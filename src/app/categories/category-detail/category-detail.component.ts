@@ -17,7 +17,6 @@ import { MatCard, MatCardHeader, MatCardTitle, MatCardContent } from '@angular/m
     selector: 'app-category-detail',
     templateUrl: './category-detail.component.html',
     styleUrls: ['./category-detail.component.css'],
-    standalone: true,
     imports: [MatCard, MatCardHeader, NgIf, MatCardTitle, MatCardContent, ReactiveFormsModule, MatFormField, MatInput, MatSelect, NgFor, MatOption, MatSlideToggle, MatButton, KeyValuePipe]
 })
 export class CategoryDetailComponent implements OnInit {

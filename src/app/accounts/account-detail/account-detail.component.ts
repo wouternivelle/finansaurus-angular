@@ -17,7 +17,6 @@ import { MatCard, MatCardHeader, MatCardTitle, MatCardContent } from '@angular/m
     selector: 'app-account-detail',
     templateUrl: './account-detail.component.html',
     styleUrls: ['./account-detail.component.css'],
-    standalone: true,
     imports: [MatCard, MatCardHeader, NgIf, MatCardTitle, MatCardContent, ReactiveFormsModule, MatFormField, MatInput, MatSelect, NgFor, MatOption, MatSlideToggle, MatButton, KeyValuePipe]
 })
 export class AccountDetailComponent implements OnInit {

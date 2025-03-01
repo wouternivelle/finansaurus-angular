@@ -16,7 +16,6 @@ import { MatCard, MatCardHeader, MatCardTitle, MatCardContent } from '@angular/m
     selector: 'app-account-list',
     templateUrl: './account-list.component.html',
     styleUrls: ['./account-list.component.css'],
-    standalone: true,
     imports: [MatCard, MatCardHeader, MatCardTitle, MatCardContent, MatButton, RouterLink, MatIcon, MatTable, MatColumnDef, MatHeaderCellDef, MatHeaderCell, MatCellDef, MatCell, MatFooterCellDef, MatFooterCell, NgClass, MatIconButton, MatMenuTrigger, MatHeaderRowDef, MatHeaderRow, MatRowDef, MatRow, MatFooterRowDef, MatFooterRow, MatMenu, MatMenuContent, MatMenuItem, CurrencyPipe]
 })
 export class AccountListComponent implements OnInit {

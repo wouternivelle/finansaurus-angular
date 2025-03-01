@@ -23,7 +23,6 @@ import { NgIf, NgClass, CurrencyPipe } from '@angular/common';
     selector: 'app-balances-detail',
     templateUrl: './balance-detail.component.html',
     styleUrls: ['./balance-detail.component.css'],
-    standalone: true,
     imports: [NgIf, MatGridList, MatGridTile, MatButton, MatMenuTrigger, MatIcon, ReactiveFormsModule, FormsModule, MatTable, MatColumnDef, MatHeaderCellDef, MatHeaderCell, MatCellDef, MatCell, NgClass, MatFooterCellDef, MatFooterCell, MatFormField, MatInput, MatHeaderRowDef, MatHeaderRow, MatRowDef, MatRow, MatFooterRowDef, MatFooterRow, MatMenu, MatMenuItem, CurrencyPipe]
 })
 export class BalanceDetailComponent implements OnInit {

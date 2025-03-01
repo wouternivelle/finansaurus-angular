@@ -8,14 +8,13 @@ import { MatCard, MatCardHeader, MatCardTitle, MatCardContent } from '@angular/m
     selector: 'app-dashboard-home',
     templateUrl: './dashboard-home.component.html',
     styleUrls: ['./dashboard-home.component.scss'],
-    standalone: true,
     imports: [
         MatCard,
         MatCardHeader,
         MatCardTitle,
         MatCardContent,
         MatIcon,
-    ],
+    ]
 })
 export class DashboardHomeComponent implements OnInit {
   currentUser: any;

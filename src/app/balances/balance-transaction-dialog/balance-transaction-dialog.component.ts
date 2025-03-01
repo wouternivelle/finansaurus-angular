@@ -11,7 +11,6 @@ import { NgIf, NgClass, CurrencyPipe, DatePipe } from '@angular/common';
     selector: 'app-balance-transaction-dialog',
     templateUrl: './balance-transaction-dialog.component.html',
     styleUrls: ['./balance-transaction-dialog.component.css'],
-    standalone: true,
     imports: [NgIf, MatProgressSpinner, MatTable, MatColumnDef, MatHeaderCellDef, MatHeaderCell, MatCellDef, MatCell, NgClass, MatHeaderRowDef, MatHeaderRow, MatRowDef, MatRow, CurrencyPipe, DatePipe]
 })
 export class BalanceTransactionDialogComponent implements OnInit {

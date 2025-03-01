@@ -16,7 +16,6 @@ import { MatToolbar } from '@angular/material/toolbar';
     selector: 'app-layout',
     templateUrl: './layout.component.html',
     styleUrls: ['./layout.component.scss'],
-    standalone: true,
     imports: [
         MatToolbar,
         MatIconButton,
@@ -38,7 +37,7 @@ import { MatToolbar } from '@angular/material/toolbar';
         MatSidenavContent,
         RouterOutlet,
         MatFabButton,
-    ],
+    ]
 })
 export class LayoutComponent implements OnDestroy, AfterViewInit {
   private readonly _mobileQueryListener: () => void;

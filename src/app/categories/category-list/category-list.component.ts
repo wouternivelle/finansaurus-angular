@@ -17,7 +17,6 @@ import { MatCard, MatCardHeader, MatCardTitle, MatCardContent } from '@angular/m
     selector: 'app-category-list',
     templateUrl: './category-list.component.html',
     styleUrls: ['./category-list.component.css'],
-    standalone: true,
     imports: [MatCard, MatCardHeader, MatCardTitle, MatCardContent, MatTable, MatColumnDef, MatHeaderCellDef, MatHeaderCell, MatCellDef, MatCell, NgClass, MatIconButton, RouterLink, MatIcon, MatMenuTrigger, MatHeaderRowDef, MatHeaderRow, MatRowDef, MatRow, MatButton, MatMenu, MatMenuContent, MatMenuItem]
 })
 export class CategoryListComponent implements OnInit {

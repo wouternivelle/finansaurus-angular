@@ -27,7 +27,6 @@ import { NgIf, NgClass, CurrencyPipe, DatePipe } from '@angular/common';
     selector: 'app-transaction-list',
     templateUrl: './transaction-list.component.html',
     styleUrls: ['./transaction-list.component.css'],
-    standalone: true,
     imports: [NgIf, MatCard, MatCardHeader, MatCardTitle, MatCardContent, MatButton, RouterLink, MatIcon, MatPaginator, MatTable, MatSort, MatColumnDef, MatHeaderCellDef, MatHeaderCell, MatSortHeader, MatCellDef, MatCell, NgClass, MatIconButton, MatMenuTrigger, MatHeaderRowDef, MatHeaderRow, MatRowDef, MatRow, MatProgressBar, MatMenu, MatMenuContent, MatMenuItem, CurrencyPipe, DatePipe]
 })
 export class TransactionListComponent implements OnInit {

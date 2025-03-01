@@ -14,7 +14,6 @@ import { MatCard, MatCardHeader, MatCardTitle, MatCardContent } from '@angular/m
     selector: 'app-payee-detail',
     templateUrl: './payee-detail.component.html',
     styleUrls: ['./payee-detail.component.css'],
-    standalone: true,
     imports: [MatCard, MatCardHeader, NgIf, MatCardTitle, MatCardContent, ReactiveFormsModule, MatFormField, MatInput, MatButton]
 })
 export class PayeeDetailComponent implements OnInit {

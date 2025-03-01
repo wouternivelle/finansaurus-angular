@@ -15,7 +15,6 @@ import { MatCard, MatCardHeader, MatCardTitle, MatCardContent } from '@angular/m
     selector: 'app-payee-list',
     templateUrl: './payee-list.component.html',
     styleUrls: ['./payee-list.component.css'],
-    standalone: true,
     imports: [MatCard, MatCardHeader, MatCardTitle, MatCardContent, MatTable, MatColumnDef, MatHeaderCellDef, MatHeaderCell, MatCellDef, MatCell, MatIconButton, RouterLink, MatIcon, MatMenuTrigger, MatFooterCellDef, MatFooterCell, MatHeaderRowDef, MatHeaderRow, MatRowDef, MatRow, MatButton, MatMenu, MatMenuContent, MatMenuItem]
 })
 export class PayeeListComponent implements OnInit {

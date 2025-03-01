@@ -14,7 +14,6 @@ import { MatCard, MatCardHeader, MatCardTitle } from '@angular/material/card';
     selector: 'app-balances-list',
     templateUrl: './balance-list.component.html',
     styleUrls: ['./balance-list.component.css'],
-    standalone: true,
     imports: [MatCard, MatCardHeader, MatCardTitle, NgIf, MatButton, MatIcon, BalanceDetailComponent, MatProgressBar]
 })
 export class BalanceListComponent implements OnInit {
