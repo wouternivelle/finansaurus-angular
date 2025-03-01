@@ -4,7 +4,7 @@ import {Category, CategoryType} from '../../categories/model/category';
 import {Payee} from '../../payees/model/payee';
 import {Account, AccountType} from '../../accounts/model/account';
 import {Transaction, TransactionType} from '../model/transaction';
-import * as moment from "moment";
+import moment from "moment";
 
 describe('TransactionDetailComponent', () => {
   let component: TransactionDetailComponent;

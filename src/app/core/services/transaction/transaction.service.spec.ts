@@ -2,7 +2,7 @@ import {TransactionService} from './transaction.service';
 import {of} from 'rxjs';
 import {Transaction, TransactionType} from '../../../transactions/model/transaction';
 import {environment} from "../../../../environments/environment";
-import * as moment from 'moment';
+import moment from 'moment';
 
 describe('TransactionService', () => {
   let service: TransactionService;
