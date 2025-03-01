@@ -14,7 +14,7 @@ import {Transaction, TransactionType} from '../model/transaction';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE, MatOption } from '@angular/material/core';
 import {MomentDateAdapter} from '@angular/material-moment-adapter';
 import {categoryKnownValidator} from './validator/category-known-validator';
-import * as moment from 'moment';
+import moment from 'moment';
 import {Balance} from '../../balances/model/balance';
 import { MatButton } from '@angular/material/button';
 import { MatSelect } from '@angular/material/select';

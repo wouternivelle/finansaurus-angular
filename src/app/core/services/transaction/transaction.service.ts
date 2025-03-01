@@ -3,9 +3,9 @@ import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {Transaction} from '../../../transactions/model/transaction';
 import {environment} from "../../../../environments/environment";
-import {HttpClient, HttpParams} from "@angular/common/http";
+import { HttpClient, HttpParams } from "@angular/common/http";
 import {TransactionsPage} from "../../../transactions/model/transactions.page";
-import * as moment from 'moment';
+import moment from 'moment';
 
 @Injectable({providedIn: 'root'})
 export class TransactionService {

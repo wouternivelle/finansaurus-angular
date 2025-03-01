@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Subject} from 'rxjs';
 import {Balance} from '../model/balance';
-import * as moment from 'moment';
+import moment from 'moment';
 import {BalanceService} from '../../core/services/balance/balance.service';
 import { MatProgressBar } from '@angular/material/progress-bar';
 import { BalanceDetailComponent } from '../balance-detail/balance-detail.component';
